@@ -1,22 +1,14 @@
-package br.com.serratec.model;
+package br.com.serratec.dto;
 
 import java.time.LocalDate;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.Embedded;
 
-@Entity
-public class Cliente {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_cliente")
-	private Long idCliente;
+import br.com.serratec.model.Cliente;
+import br.com.serratec.model.Endereco;
+
+public class ClienteDTO {
 	
 	private String email;
 	
@@ -26,25 +18,28 @@ public class Cliente {
 	@Column(name = "nome_completo")
 	private String nomeCompleto;
 	
-	private String senha;
-	
 	private String cpf;
 	
 	private String telefone;
 	
-	@ManyToOne
-	@JoinColumn(name = "id_endereco")
+	@Embedded
 	private Endereco endereco;
 	
 	@Column(name = "data_nascimento")
 	private LocalDate dataNascimento;
-
-	public Long getIdCliente() {
-		return idCliente;
+	
+	public ClienteDTO() {
+		// TODO Auto-generated constructor stub
 	}
 
-	public void setIdCliente(Long idCliente) {
-		this.idCliente = idCliente;
+	public ClienteDTO(Cliente cliente) {
+		super();
+		this.email = cliente.getEmail();
+		this.nomeUsuario = cliente.getNomeUsuario();
+		this.nomeCompleto = cliente.getNomeCompleto();
+		this.cpf = cliente.getCpf();
+		this.telefone = cliente.getTelefone();
+		this.dataNascimento = cliente.getDataNascimento();
 	}
 
 	public String getEmail() {
@@ -71,14 +66,6 @@ public class Cliente {
 		this.nomeCompleto = nomeCompleto;
 	}
 
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
-
 	public String getCpf() {
 		return cpf;
 	}
@@ -93,6 +80,14 @@ public class Cliente {
 
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
+	}
+
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
 	}
 
 	public LocalDate getDataNascimento() {
