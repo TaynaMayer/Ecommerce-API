@@ -1,5 +1,9 @@
 package br.com.serratec.repository;
 
-public interface EnderecoRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
 
+import br.com.serratec.model.Endereco;
+
+public interface EnderecoRepository extends JpaRepository<Endereco, Long>{
+    public Endereco findByCep(String cep);
 }
