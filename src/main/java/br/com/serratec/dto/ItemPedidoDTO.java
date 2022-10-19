@@ -1,10 +1,17 @@
 package br.com.serratec.dto;
 
 import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 import br.com.serratec.model.ItemPedido;
 
 public class ItemPedidoDTO {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long idItemPedido;
 	
 	private Integer quantidade;
 	
