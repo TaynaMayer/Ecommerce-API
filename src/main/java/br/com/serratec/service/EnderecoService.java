@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
+import br.com.serratec.dto.EnderecoDTO;
 import br.com.serratec.model.Endereco;
 import br.com.serratec.repository.EnderecoRepository;
 
