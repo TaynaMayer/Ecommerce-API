@@ -36,7 +36,7 @@ public class PedidoController {
 		try {
 			PedidoReponseDTO pedidoDTO= pedidoService.inserir(pedidoInserirDTO);
 			URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-					.buildAndExpand(pedidoDTO.getId()).toUri();
+					.buildAndExpand(pedidoDTO.getIdPedido()).toUri();
 			return ResponseEntity.created(uri).body(pedidoDTO);
 
 		} catch (EmailException e) {
