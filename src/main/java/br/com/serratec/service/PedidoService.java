@@ -7,23 +7,18 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import br.com.serratec.dto.PedidoDTO;
 import br.com.serratec.exception.EmailException;
+import br.com.serratec.model.Pedido;
+import br.com.serratec.repository.PedidoRepository;
 
 
 @Service
 public class PedidoService {
 	
 	@Autowired
-	private PedidoRepository pedidoRepository;
-
-	@Autowired
-	private BCryptPasswordEncoder bCryptPasswordEncoder;
-
-	@Autowired
-	private PedidoPerfilRepository pedidoPerfilRepository;
-	
-	@Autowired
-	private PerfilService perfilService;
+	private PedidoRepository pedidoRepository;	
 	
 	@Autowired
 	private MailConfig mailConfig;
