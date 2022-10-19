@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import br.com.serratec.dto.ProdutoDTO;
-import br.com.serratec.dto.ProdutoInserirDTO;
+import br.com.serratec.dto.ProdutoResponseDTO;
+import br.com.serratec.dto.ProdutoRequestDTO;
 import br.com.serratec.dto.UsuarioDTO;
 import br.com.serratec.exception.EmailException;
 import br.com.serratec.model.Produto;
@@ -29,12 +29,12 @@ public class ProdutoController {
 	private ProdutoService produtoService;
 
 //	@GetMapping
-//	public ResponseEntity<List<ProdutoDTO>> buscarTodosDTO() {
-//        List<ProdutoDTO> listaProdutos = produtoService.buscarTodosDTO();
+//	public ResponseEntity<List<ProdutoResponseDTO>> buscarTodosDTO() {
+//        List<ProdutoResponseDTO> listaProdutos = produtoService.buscarTodosDTO();
 //        return ResponseEntity.ok(listaProdutos);
 	
 	@GetMapping
-	public ResponseEntity<List<ProdutoDTO>> listar() {
+	public ResponseEntity<List<ProdutoResponseDTO>> listar() {
 		return ResponseEntity.ok(produtoService.listar());
 	}
 
@@ -48,9 +48,9 @@ public class ProdutoController {
 //	}
 
 	@PostMapping
-	public ResponseEntity<Object> inserir(@RequestBody ProdutoInserirDTO produtoInserirDTO) {
+	public ResponseEntity<Object> inserir(@RequestBody ProdutoRequestDTO produtoInserirDTO) {
 		try {
-			ProdutoDTO produtoDTO = produtoService.inserir(produtoInserirDTO);
+			ProdutoResponseDTO produtoDTO = produtoService.inserir(produtoInserirDTO);
 			URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(produtoDTO.getId())
 					.toUri();
 			return ResponseEntity.created(uri).body(produtoDTO);

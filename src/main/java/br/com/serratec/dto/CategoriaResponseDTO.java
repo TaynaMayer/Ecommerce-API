@@ -7,7 +7,7 @@ import javax.persistence.Id;
 
 import br.com.serratec.model.Categoria;
 
-public class CategoriaDTO {
+public class CategoriaResponseDTO {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,15 +17,23 @@ public class CategoriaDTO {
 	
 	private String descricao;
 	
-	public CategoriaDTO() {
+	public CategoriaResponseDTO() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public CategoriaDTO(Categoria categoria) {
+    public CategoriaResponseDTO(Categoria categoria) {
 		super();
 		this.nome = categoria.getNome();
 		this.descricao = categoria.getDescricao();
 	}
+    
+    public Long getIdCategoria() {
+        return idCategoria;
+    }
+
+    public void setIdCategoria(Long idCategoria) {
+        this.idCategoria = idCategoria;
+    }
 
 	public String getNome() {
 		return nome;

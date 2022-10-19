@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import br.com.serratec.model.Categoria;
 import br.com.serratec.model.Produto;
 
-public class ProdutoInserirDTO {
+public class ProdutoRequestDTO {
 	
 	private String nome;
 	
@@ -19,11 +19,11 @@ public class ProdutoInserirDTO {
 	
 	private Categoria categoria;
 	
-	public ProdutoInserirDTO() {
+	public ProdutoRequestDTO() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ProdutoInserirDTO(Produto produto) {
+	public ProdutoRequestDTO(Produto produto) {
 		super();
 		this.nome = produto.getNome();
 		this.descricao = produto.getDescricao();

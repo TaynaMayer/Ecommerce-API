@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import br.com.serratec.dto.PedidoDTO;
+import br.com.serratec.dto.PedidoReponseDTO;
 import br.com.serratec.exception.EmailException;
 import br.com.serratec.model.Pedido;
 import br.com.serratec.repository.PedidoRepository;
@@ -23,19 +23,19 @@ public class PedidoService {
 	@Autowired
 	private MailConfig mailConfig;
 	
-	public List<PedidoDTO> listar() {
+	public List<PedidoReponseDTO> listar() {
 		List<Pedido> pedidos = pedidoRepository.findAll();
-		List<PedidoDTO> pedidosDTO = new ArrayList<>();
+		List<PedidoReponseDTO> pedidosDTO = new ArrayList<>();
 
 		for (Pedido pedido : pedidos) {
-			pedidosDTO.add(new PedidoDTO(pedido));
+			pedidosDTO.add(new PedidoReponseDTO(pedido));
 
 		}
 		return pedidosDTO;
 		
 	}
 
-	public PedidoDTO inserir(PedidoInserirDTO pedidoInserirDTO) {
+	public PedidoReponseDTO inserir(PedidoRequestDTO pedidoInserirDTO) {
 		if (pedidoRepository.findByEmail(pedidoInserirDTO.getEmail()) != null) {
 			throw new EmailException("Email já existe na base");
 		}
@@ -51,7 +51,7 @@ public class PedidoService {
 		}
 		pedidoPerfilRepository.saveAll(pedidoInserirDTO.getPedidosPerfil());		
 		mailConfig.sendEmail(pedido.getEmail(), "Cadastro de Usuário", pedido.toString());
-		return new PedidoDTO(pedido);
+		return new PedidoReponseDTO(pedido);
 	}
 
 }

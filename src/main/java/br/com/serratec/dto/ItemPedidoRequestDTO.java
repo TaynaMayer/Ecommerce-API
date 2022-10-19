@@ -2,17 +2,17 @@ package br.com.serratec.dto;
 
 import br.com.serratec.model.ItemPedido;
 
-public class ItemPedidoInserir {
+public class ItemPedidoRequestDTO {
 	
 	private Integer quantidade;
 	
 	private Integer precoVenda;
 	
-	public ItemPedidoInserir() {
+	public ItemPedidoRequestDTO() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ItemPedidoInserir(ItemPedido itemPedido) {
+	public ItemPedidoRequestDTO(ItemPedido itemPedido) {
 		super();
 		this.quantidade = itemPedido.getQuantidade();
 		this.precoVenda = itemPedido.getPrecoVenda();

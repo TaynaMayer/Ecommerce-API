@@ -45,7 +45,15 @@ public class EnderecoDTO {
 
 
 
-	public String getCep() {
+	public Long getIdEndereco() {
+        return idEndereco;
+    }
+
+    public void setIdEndereco(Long idEndereco) {
+        this.idEndereco = idEndereco;
+    }
+
+    public String getCep() {
 		return cep;
 	}
 

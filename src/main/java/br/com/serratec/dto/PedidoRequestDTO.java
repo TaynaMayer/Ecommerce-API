@@ -2,38 +2,23 @@ package br.com.serratec.dto;
 
 import java.time.LocalDate;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-
 import br.com.serratec.model.Pedido;
 
-public class PedidoDTO {
+public class PedidoRequestDTO {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long idPedido;
-	
-	//Objeto(lista) de produtos
-	
-	@Column(name = "data_pedido")
 	private LocalDate dataPedido;
 	
-	@Column(name = "data_entrega")
 	private LocalDate dataEntrega;
 	
-	@Column(name = "data_envio")
 	private LocalDate dataEnvio;
 	
 	private String status;
 	
-	public PedidoDTO() {
-		
+	public PedidoRequestDTO() {
+		// TODO Auto-generated constructor stub
 	}
 
-	public PedidoDTO(Pedido pedido) {
+	public PedidoRequestDTO(Pedido pedido) {
 		super();
 		this.dataPedido = pedido.getDataPedido();
 		this.dataEntrega = pedido.getDataEntrega();
