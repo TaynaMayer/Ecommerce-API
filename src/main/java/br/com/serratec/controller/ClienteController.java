@@ -1,10 +1,10 @@
-package br.com.serratec.controller;
+// package br.com.serratec.controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+// import org.springframework.web.bind.annotation.RequestMapping;
+// import org.springframework.web.bind.annotation.RestController;
 
-@RestController
-@RequestMapping("/clientes")
-public class ClienteController {
+// @RestController
+// @RequestMapping("/clientes")
+// public class ClienteController {
 
-}
+// }
