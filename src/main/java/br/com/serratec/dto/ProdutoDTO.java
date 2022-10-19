@@ -95,4 +95,6 @@ public class ProdutoDTO {
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
+	
+	
 }
