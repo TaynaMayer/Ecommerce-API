@@ -41,8 +41,7 @@ public class PedidoService {
 		}
 		Pedido pedido = new Pedido();
 		pedido.setNome(pedidoInserirDTO.getNome());
-		pedido.setEmail(pedidoInserirDTO.getEmail());
-		pedido.setSenha(bCryptPasswordEncoder.encode(pedidoInserirDTO.getSenha()));
+		pedido.setEmail(pedidoInserirDTO.getEmail());		
 		pedido = pedidoRepository.save(pedido);
 		for (PedidoPerfil up : pedidoInserirDTO.getPedidosPerfil()) {
 			up.setPedido(pedido);
