@@ -13,10 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
 import br.com.serratec.dto.ProdutoResponseDTO;
 import br.com.serratec.dto.ProdutoRequestDTO;
-import br.com.serratec.dto.UsuarioDTO;
 import br.com.serratec.exception.EmailException;
 import br.com.serratec.model.Produto;
 import br.com.serratec.service.ProdutoService;
@@ -25,18 +23,13 @@ import br.com.serratec.service.ProdutoService;
 @RequestMapping("/produtos")
 public class ProdutoController {
 
-	@Autowired
-	private ProdutoService produtoService;
+    @Autowired
+    private ProdutoService produtoService;
 
-//	@GetMapping
-//	public ResponseEntity<List<ProdutoResponseDTO>> buscarTodosDTO() {
-//        List<ProdutoResponseDTO> listaProdutos = produtoService.buscarTodosDTO();
-//        return ResponseEntity.ok(listaProdutos);
-	
-	@GetMapping
-	public ResponseEntity<List<ProdutoResponseDTO>> listar() {
-		return ResponseEntity.ok(produtoService.listar());
-	}
+    @GetMapping
+    public ResponseEntity<List<ProdutoResponseDTO>> listar() {
+        return ResponseEntity.ok(produtoService.listar());
+    }
 
 //	@GetMapping("/{id}")
 //	public ResponseEntity<Produto> buscarUm(@PathVariable Long id) {
@@ -47,23 +40,18 @@ public class ProdutoController {
 //		return ResponseEntity.notFound().build();
 //	}
 
-	@PostMapping
-	public ResponseEntity<Object> inserir(@RequestBody ProdutoRequestDTO produtoInserirDTO) {
-		try {
-			ProdutoResponseDTO produtoDTO = produtoService.inserir(produtoInserirDTO);
-			URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(produtoDTO.getId())
-					.toUri();
-			return ResponseEntity.created(uri).body(produtoDTO);
+    @PostMapping
+    public ResponseEntity<Object> inserir(@RequestBody ProdutoRequestDTO produtoInserirDTO) {
+        try {
+            ProdutoResponseDTO produtoDTO = produtoService.inserir(produtoInserirDTO);
+            URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+                    .buildAndExpand(produtoDTO.getIdProduto())
+                    .toUri();
+            return ResponseEntity.created(uri).body(produtoDTO);
 
-		} catch (EmailException e) {
-			return ResponseEntity.unprocessableEntity().body(e.getMessage());
-		}
-	}
-//	@PostMapping
-//	@ResponseStatus(HttpStatus.CREATED)
-//	public Produto inserir(@RequestBody Produto produto) {
-//		return produtoService.save(produto);
-//		
-//	}
+        } catch (EmailException e) {
+            return ResponseEntity.unprocessableEntity().body(e.getMessage());
+        }
 
+    }
 }
