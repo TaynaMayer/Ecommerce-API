@@ -1,46 +1,35 @@
-package br.com.serratec.model;
+package br.com.serratec.dto;
 
 import java.time.LocalDate;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import br.com.serratec.model.Categoria;
+import br.com.serratec.model.Produto;
 
-@Entity
-public class Produto {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_produto")
-	private Long idProduto;
+public class ProdutoInserirDTO {
 	
 	private String nome;
 	
 	private String descricao;
 	
-	@Column(name = "qtd_estoque")
 	private Integer qtdEstoque;
 	
-	@Column(name = "data_cadastro")
 	private LocalDate dataCadastro;
 	
-	@Column(name = "valor_unitario")
 	private Double valorUnitario;
 	
-	@ManyToOne
-	@JoinColumn(name = "id_categoria")
 	private Categoria categoria;
-
-	public Long getIdProduto() {
-		return idProduto;
+	
+	public ProdutoInserirDTO() {
+		// TODO Auto-generated constructor stub
 	}
 
-	public void setIdProduto(Long idProduto) {
-		this.idProduto = idProduto;
+	public ProdutoInserirDTO(Produto produto) {
+		super();
+		this.nome = produto.getNome();
+		this.descricao = produto.getDescricao();
+		this.qtdEstoque = produto.getQtdEstoque();
+		this.dataCadastro = produto.getDataCadastro();
+		this.valorUnitario = produto.getValorUnitario();
 	}
 
 	public String getNome() {
@@ -81,5 +70,13 @@ public class Produto {
 
 	public void setValorUnitario(Double valorUnitario) {
 		this.valorUnitario = valorUnitario;
+	}
+
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
 	}
 }
