@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.com.serratec.dto.PedidoDTO;
+import br.com.serratec.dto.PedidoInserirDTO;
 import br.com.serratec.exception.EmailException;
 import br.com.serratec.service.PedidoService;
 
