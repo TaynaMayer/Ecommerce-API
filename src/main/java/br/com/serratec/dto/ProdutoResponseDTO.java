@@ -12,13 +12,13 @@ import javax.persistence.ManyToOne;
 import br.com.serratec.model.Categoria;
 import br.com.serratec.model.Produto;
 
-public class ProdutoDTO {
+public class ProdutoResponseDTO {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idProduto;
-	
-	private String nome;
+
+    private String nome;
 	
 	private String descricao;
 	
@@ -35,11 +35,11 @@ public class ProdutoDTO {
 	@JoinColumn(name = "id_categoria")
 	private Categoria categoria;
 	
-	public ProdutoDTO() {
+	public ProdutoResponseDTO() {
 		
 	}
 
-	public ProdutoDTO(Produto produto) {
+	public ProdutoResponseDTO(Produto produto) {
 		super();
 		this.nome = produto.getNome();
 		this.descricao = produto.getDescricao();
@@ -47,6 +47,14 @@ public class ProdutoDTO {
 		this.dataCadastro = produto.getDataCadastro();
 		this.valorUnitario = produto.getValorUnitario();
 	}
+	
+	public Long getIdProduto() {
+        return idProduto;
+    }
+
+    public void setIdProduto(Long idProduto) {
+        this.idProduto = idProduto;
+    }
 
 	public String getNome() {
 		return nome;

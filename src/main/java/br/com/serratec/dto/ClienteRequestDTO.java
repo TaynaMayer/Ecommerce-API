@@ -2,48 +2,34 @@ package br.com.serratec.dto;
 
 import java.time.LocalDate;
 
-import javax.persistence.Column;
-import javax.persistence.Embedded;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
 import br.com.serratec.model.Cliente;
-import br.com.serratec.model.Endereco;
 
-public class ClienteDTO {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long idCliente;
+public class ClienteRequestDTO {
 	
 	private String email;
 	
-	@Column(name = "nome_usuario")
 	private String nomeUsuario;
 	
-	@Column(name = "nome_completo")
 	private String nomeCompleto;
+	
+	private String senha;
 	
 	private String cpf;
 	
 	private String telefone;
 	
-	@Embedded
-	private Endereco endereco;
-	
-	@Column(name = "data_nascimento")
 	private LocalDate dataNascimento;
 	
-	public ClienteDTO() {
+	public ClienteRequestDTO() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ClienteDTO(Cliente cliente) {
+	public ClienteRequestDTO(Cliente cliente) {
 		super();
 		this.email = cliente.getEmail();
 		this.nomeUsuario = cliente.getNomeUsuario();
 		this.nomeCompleto = cliente.getNomeCompleto();
+		this.senha = cliente.getSenha();
 		this.cpf = cliente.getCpf();
 		this.telefone = cliente.getTelefone();
 		this.dataNascimento = cliente.getDataNascimento();
@@ -73,6 +59,14 @@ public class ClienteDTO {
 		this.nomeCompleto = nomeCompleto;
 	}
 
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
 	public String getCpf() {
 		return cpf;
 	}
@@ -87,14 +81,6 @@ public class ClienteDTO {
 
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
-	}
-
-	public Endereco getEndereco() {
-		return endereco;
-	}
-
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
 	}
 
 	public LocalDate getDataNascimento() {

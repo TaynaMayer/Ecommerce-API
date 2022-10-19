@@ -7,7 +7,7 @@ import javax.persistence.Id;
 
 import br.com.serratec.model.ItemPedido;
 
-public class ItemPedidoDTO {
+public class ItemPedidoResponseDTO {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,14 +18,22 @@ public class ItemPedidoDTO {
 	@Column(name = "preco_venda")
 	private Integer precoVenda;
 
-	public ItemPedidoDTO() {
+	public ItemPedidoResponseDTO() {
 		
 	}
 
-	public ItemPedidoDTO(ItemPedido itemPedido) {
+	public ItemPedidoResponseDTO(ItemPedido itemPedido) {
 		super();
 		this.quantidade = itemPedido.getQuantidade();
 		this.precoVenda = itemPedido.getPrecoVenda();
+	}
+	
+	public Long getIdPedido() {
+	    return idItemPedido;
+	}
+	
+	public void setIdPedido(Long idItemPedido) {
+	    this.idItemPedido = idItemPedido;
 	}
 
 	public Integer getQuantidade() {

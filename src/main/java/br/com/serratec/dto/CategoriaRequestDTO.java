@@ -2,17 +2,17 @@ package br.com.serratec.dto;
 
 import br.com.serratec.model.Categoria;
 
-public class CategoriaInserirDTO {
+public class CategoriaRequestDTO {
 
 	private String nome;
 	
 	private String descricao;
 	
-	public CategoriaInserirDTO() {
+	public CategoriaRequestDTO() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public CategoriaInserirDTO(Categoria categoria) {
+	public CategoriaRequestDTO(Categoria categoria) {
 		super();
 		this.nome = categoria.getNome();
 		this.descricao = categoria.getDescricao();

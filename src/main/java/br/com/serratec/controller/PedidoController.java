@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import br.com.serratec.dto.PedidoDTO;
-import br.com.serratec.dto.PedidoInserirDTO;
+import br.com.serratec.dto.PedidoReponseDTO;
+import br.com.serratec.dto.PedidoRequestDTO;
 import br.com.serratec.exception.EmailException;
 import br.com.serratec.service.PedidoService;
 
@@ -27,14 +27,14 @@ public class PedidoController {
 	private PedidoService pedidoService;
 
 	@GetMapping
-	public ResponseEntity<List<PedidoDTO>> listar() {
+	public ResponseEntity<List<PedidoReponseDTO>> listar() {
 		return ResponseEntity.ok(pedidoService.listar());
 	}
 
 	@PostMapping
-	public ResponseEntity<Object> inserir(@Valid @RequestBody PedidoInserirDTO pedidoInserirDTO) {
+	public ResponseEntity<Object> inserir(@Valid @RequestBody PedidoRequestDTO pedidoInserirDTO) {
 		try {
-			PedidoDTO pedidoDTO= pedidoService.inserir(pedidoInserirDTO);
+			PedidoReponseDTO pedidoDTO= pedidoService.inserir(pedidoInserirDTO);
 			URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 					.buildAndExpand(pedidoDTO.getId()).toUri();
 			return ResponseEntity.created(uri).body(pedidoDTO);

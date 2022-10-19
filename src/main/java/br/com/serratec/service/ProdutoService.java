@@ -4,7 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import br.com.serratec.config.EmailConfig;
-import br.com.serratec.dto.ProdutoDTO;
+import br.com.serratec.dto.ProdutoResponseDTO;
 
 import br.com.serratec.model.Produto;
 import br.com.serratec.repository.ProdutoRepository;
@@ -18,12 +18,12 @@ public class ProdutoService {
 	@Autowired
 	private EmailConfig emailConfig;
 
-	public List<ProdutoDTO> listar() {
+	public List<ProdutoResponseDTO> listar() {
 		List<Produto> produtos = produtoRepository.findAll();
-		List<ProdutoDTO> produtosDTO = new ArrayList<>();
+		List<ProdutoResponseDTO> produtosDTO = new ArrayList<>();
 
 		for (Produto produto : produtos) {
-			produtosDTO.add(new ProdutoDTO(produto));
+			produtosDTO.add(new ProdutoResponseDTO(produto));
 
 		}
 		return produtosDTO;
