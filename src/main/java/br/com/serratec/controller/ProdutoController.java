@@ -23,10 +23,10 @@ public class ProdutoController {
 	private ProdutoService produtoService;
 
 	@GetMapping
-	public ResponseEntity<List<ProdutosDTO>> listar() {
-		return ResponseEntity.ok(produtoService.listar());
-	}
-
+	public ResponseEntity<List<ProdutoDTO>> buscarTodosDTO() {
+        List<ProdutoDTO> listaProdutos = produtoService.buscarTodosDTO();
+        return ResponseEntity.ok(listaProdutos);
+        
 	@PostMapping
 	public ResponseEntity<Object> inserir(@RequestBody ProdutosInserirDTO produtoInserirDTO) {
 		try {
@@ -39,6 +39,11 @@ public class ProdutoController {
 			return ResponseEntity.unprocessableEntity().body(e.getMessage());
 		}
 	}
-
+//	@PostMapping
+//	@ResponseStatus(HttpStatus.CREATED)
+//	public Produto inserir(@RequestBody Produto produto) {
+//		return produtoService.save(produto);
+//		
+//	}
 
 }
