@@ -1,8 +1,17 @@
 package br.com.serratec.dto;
 
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 import br.com.serratec.model.Categoria;
 
 public class CategoriaDTO {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long idCategoria;
 	
 	private String nome;
 	

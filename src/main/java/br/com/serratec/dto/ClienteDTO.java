@@ -4,11 +4,18 @@ import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Embedded;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 import br.com.serratec.model.Cliente;
 import br.com.serratec.model.Endereco;
 
 public class ClienteDTO {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long idCliente;
 	
 	private String email;
 	

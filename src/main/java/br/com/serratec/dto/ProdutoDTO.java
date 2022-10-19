@@ -3,6 +3,9 @@ package br.com.serratec.dto;
 import java.time.LocalDate;
 
 import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
@@ -10,6 +13,10 @@ import br.com.serratec.model.Categoria;
 import br.com.serratec.model.Produto;
 
 public class ProdutoDTO {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long idProduto;
 	
 	private String nome;
 	
