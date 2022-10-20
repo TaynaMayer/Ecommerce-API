@@ -10,7 +10,10 @@ import org.springframework.stereotype.Service;
 
 import br.com.serratec.dto.CategoriaRequestDTO;
 import br.com.serratec.dto.CategoriaResponseDTO;
+import br.com.serratec.exception.ResourceBadRequestException;
+import br.com.serratec.exception.ResourceNotFoundException;
 import br.com.serratec.model.Categoria;
+import br.com.serratec.model.Cliente;
 import br.com.serratec.repository.CategoriaRepository;
 
 @Service
@@ -39,7 +42,7 @@ public class CategoriaService {
 		
 		if(optCategoria.isEmpty()) {
 			//Aqui lanço um exception
-			//Not found
+			throw new ResourceNotFoundException("Não foi possível encontrar um cliente com id: " + id);
 		}
 		
 		var categoriaDTO = new ModelMapper().map(optCategoria.get(), CategoriaResponseDTO.class);
@@ -57,9 +60,32 @@ public class CategoriaService {
 		categoriaModel.setIdCategoria(null);
 		categoriaModel =  repositorio.save(categoriaModel);
 		
+		if(Cliente.getEmail() == null) {
+			throw new ResourceBadRequestException("Deu ruim mano, esqueceu de passar o e-mail.");
+		}
+
 		return mapper.map(categoriaModel, CategoriaResponseDTO.class);
 		
 	}
 
+	public CategoriaResponseDTO atualizar(Long id, CategoriaRequestDTO categoriaDTO){
+		ModelMapper mapper = new ModelMapper();
+
+		var categoriaModel = mapper.map(categoriaDTO, Categoria.class);
+
+		categoriaModel.setIdCategoria(id);
+		categoriaModel =  repositorio.save(categoriaModel);
+
+		return mapper.map(categoriaModel, CategoriaResponseDTO.class);
+	}
+
+	public void deletar(Long id){
+		var optCategoria = obterPorId(id);
+
+		if(optCategoria.isEmpty()){
+			//lancar exception
+		}
+		repositorio.deleteById(id);
+	}
 
 }
