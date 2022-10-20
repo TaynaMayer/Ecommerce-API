@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -51,15 +52,15 @@ public class PedidoController {
 	}
 	
 	@PutMapping("/{id}")
-    public ResponseEntity<PedidoResponseDTO> atualizar(@PathVariable Long id, @RequestBody PedidoRequestDTO pedido) {
-        PedidoResponseDTO dto = pedidoService.atualizar(id, pedido);        
+    public ResponseEntity<PedidoResponseDTO> atualizar( @PathVariable Long id, @RequestBody PedidoRequestDTO categoria) {
+        PedidoResponseDTO dto = pedidoService.atualizar(id, categoria);        
         return ResponseEntity.ok(dto);
     }
-    
+
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deletar(@PathVariable Long id){
-        pedidoService.deletar(id);        
-        return ResponseEntity.ok("O id:" + id + " foi deletado com sucesso!"); // 200
+    public ResponseEntity<?> deletar(Long id){
+        pedidoService.deletar(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
    
 }

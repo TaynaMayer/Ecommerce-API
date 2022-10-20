@@ -1,9 +1,7 @@
 package br.com.serratec.controller;
-
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -70,18 +68,15 @@ public class ProdutoController {
     }
     
     @PutMapping("/{id}")
-    public ResponseEntity<ProdutoResponseDTO> atualizar(@PathVariable Long id, @RequestBody ProdutoRequestDTO produto) {
-        ProdutoResponseDTO dto = produtoService.atualizar(id, produto);        
+    public ResponseEntity<ProdutoResponseDTO> atualizar( @PathVariable Long id, @RequestBody ProdutoRequestDTO categoria) {
+        ProdutoResponseDTO dto = produtoService.atualizar(id, categoria);        
         return ResponseEntity.ok(dto);
     }
-    
+
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deletar(@PathVariable Long id){
-        produtoService.deletar(id);        
-        return ResponseEntity.ok("O id:" + id + " foi deletado com sucesso!"); // 200
-    }
-    
-    
-    
+    public ResponseEntity<?> deletar(Long id){
+        produtoService.deletar(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }   
     
 }
