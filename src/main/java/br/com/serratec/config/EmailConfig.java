@@ -8,17 +8,17 @@ import org.springframework.mail.javamail.JavaMailSender;
 @Configuration
 public class EmailConfig {
 
-//    @Autowired
-//    private JavaMailSender javaMailSender;
-//
-//    public void sendEmail(String para, String assunto, String texto) {
-//        SimpleMailMessage message = new SimpleMailMessage();
-//        message.setFrom("");
-//        message.setTo(para);
-//        message.setSubject(assunto);
-//        message.setText("Pedido nº: \n " + texto + "\n \n Serratec");
-//        javaMailSender.send(message);
-//
-//    }
+   @Autowired
+   private JavaMailSender javaMailSender;
+
+   public void sendEmail(String para, String assunto, String texto) {
+       SimpleMailMessage message = new SimpleMailMessage();
+       message.setFrom("");
+       message.setTo(para);
+       message.setSubject(assunto);
+       message.setText("Pedido nº: \n " + texto + "\n \n Serratec");
+       javaMailSender.send(message);
+
+   }
 
 }
