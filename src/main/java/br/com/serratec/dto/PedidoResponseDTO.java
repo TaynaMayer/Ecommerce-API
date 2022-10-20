@@ -10,7 +10,7 @@ import javax.persistence.JoinColumn;
 
 import br.com.serratec.model.Pedido;
 
-public class PedidoReponseDTO {
+public class PedidoResponseDTO {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,11 +27,11 @@ public class PedidoReponseDTO {
 	
 	private String status;
 	
-	public PedidoReponseDTO() {
+	public PedidoResponseDTO() {
 		
 	}
 
-	public PedidoReponseDTO(Pedido pedido) {
+	public PedidoResponseDTO(Pedido pedido) {
 		super();
 		this.dataPedido = pedido.getDataPedido();
 		this.dataEntrega = pedido.getDataEntrega();
