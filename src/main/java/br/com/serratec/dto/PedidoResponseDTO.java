@@ -13,7 +13,6 @@ import br.com.serratec.model.Pedido;
 public class PedidoResponseDTO {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idPedido;
 	
 	@Column(name = "data_pedido")
@@ -33,11 +32,13 @@ public class PedidoResponseDTO {
 
 	public PedidoResponseDTO(Pedido pedido) {
 		super();
+		this.idPedido = pedido.getIdPedido();
 		this.dataPedido = pedido.getDataPedido();
 		this.dataEntrega = pedido.getDataEntrega();
 		this.dataEnvio = pedido.getDataEnvio();
 		this.status = pedido.getStatus();
 	}
+	
 	
 	public Long getIdPedido() {
         return idPedido;

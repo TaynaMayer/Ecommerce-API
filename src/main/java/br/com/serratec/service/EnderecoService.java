@@ -14,30 +14,41 @@ import br.com.serratec.repository.EnderecoRepository;
 
 @Service
 public class EnderecoService {
-	@Autowired
-	private EnderecoRepository enderecoRepository;
+    @Autowired
+    private EnderecoRepository enderecoRepository;
 
-	public EnderecoDTO buscar(String cep) {
-		Optional<Endereco> endereco = Optional.ofNullable(enderecoRepository.findByCep(cep));
-		if (endereco.isPresent()) {
-			return new EnderecoDTO(endereco.get());
-		} else {
-			RestTemplate rs = new RestTemplate();
-			String uri = "http://viacep.com.br/ws/" + cep + "/json";
-			Optional<Endereco> enderecoViaCep = Optional.ofNullable(rs.getForObject(uri, Endereco.class));
-			if (enderecoViaCep.get().getCep() != null) {
-				String cepSemTraco = enderecoViaCep.get().getCep().replaceAll("-", "");
-				enderecoViaCep.get().setCep(cepSemTraco);
-				return inserir(enderecoViaCep.get());
-			} else {
-				throw new HttpClientErrorException(HttpStatus.NOT_FOUND);
-			}
-		}
-	}
+    public EnderecoDTO buscar(String cep) {
+        Optional<Endereco> endereco = Optional.ofNullable(enderecoRepository.findByCep(cep));
+        if (endereco.isPresent()) {
+            return new EnderecoDTO(endereco.get());
+        } else {
+            RestTemplate rs = new RestTemplate();
+            String uri = "http://viacep.com.br/ws/" + cep + "/json";
+            Optional<Endereco> enderecoViaCep = Optional.ofNullable(rs.getForObject(uri, Endereco.class));
+            if (enderecoViaCep.get().getCep() != null) {
+                String cepSemTraco = enderecoViaCep.get().getCep().replaceAll("-", "");
+                enderecoViaCep.get().setCep(cepSemTraco);
+                return new EnderecoDTO(enderecoViaCep.get());
+            } else {
+                throw new HttpClientErrorException(HttpStatus.NOT_FOUND);
+            }
+        }
+    }
 
-	public EnderecoDTO inserir(Endereco endereco) {
-		endereco = enderecoRepository.save(endereco);
-		return new EnderecoDTO(endereco);
+    public Endereco salvar(String cep) {
+        EnderecoDTO ent = buscar(cep);
+
+        Endereco endereco = new Endereco();
+        endereco.setBairro(ent.getBairro());
+        endereco.setCep(ent.getCep());
+        endereco.setIdEndereco(ent.getIdEndereco());
+        endereco.setCidade(ent.getCidade());
+        endereco.setEstado(ent.getEstado());
+
+        endereco = enderecoRepository.save(endereco);
+
+        return endereco;
+        
 	}
 
 }

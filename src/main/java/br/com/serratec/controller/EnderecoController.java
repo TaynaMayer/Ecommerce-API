@@ -8,25 +8,34 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.serratec.dto.EnderecoDTO;
+import br.com.serratec.model.Endereco;
 import br.com.serratec.service.EnderecoService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
 @RestController
 @RequestMapping("/enderecos")
 public class EnderecoController {
     
     @Autowired
-    EnderecoService enderecoService;
+    private EnderecoService enderecoService;
 
     @GetMapping("{cep}")
+    @ApiOperation(value = "Buscar um cep", notes = "preencha com um cep")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode="200", description = "Retorna o cep do cliente"),
+            @ApiResponse(responseCode="401", description = "Erro de autenticação"),
+            @ApiResponse(responseCode="403", description = "Você não tem permissão para o recurso"),
+            @ApiResponse(responseCode="404", description = "Cep não encontrado"),
+            @ApiResponse(responseCode="500", description = "Erro na aplicação")
+    })
+    public ResponseEntity<Endereco> salvar(@PathVariable String cep) {
+        Endereco dto = enderecoService.salvar(cep);
+        if (dto == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(dto);
+    }
 
-	//@ApiOperation
-
-    public ResponseEntity<EnderecoDTO> buscarCep(@PathVariable String cep) {
-		EnderecoDTO endereco = enderecoService.buscar(cep);
-		if (endereco == null) {
-			return ResponseEntity.notFound().build();
-	} else {
-		return ResponseEntity.ok(endereco);
-		}
-	}
 }
