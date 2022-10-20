@@ -1,5 +1,8 @@
 package br.com.serratec.dto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,6 +15,8 @@ public class ItemPedidoResponseDTO {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idItemPedido;
+	
+	private List<ItemPedido> itensPedidos = new ArrayList<>();
 	
 	private Integer quantidade;
 	

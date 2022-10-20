@@ -16,8 +16,6 @@ public class PedidoReponseDTO {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idPedido;
 	
-	//Objeto(lista) de produtos
-	
 	@Column(name = "data_pedido")
 	private LocalDate dataPedido;
 	
