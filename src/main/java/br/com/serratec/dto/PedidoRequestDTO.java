@@ -6,6 +6,8 @@ import br.com.serratec.model.Pedido;
 
 public class PedidoRequestDTO {
 	
+    private Long idPedido;
+    
 	private LocalDate dataPedido;
 	
 	private LocalDate dataEntrega;
@@ -14,19 +16,31 @@ public class PedidoRequestDTO {
 	
 	private String status;
 	
+	
 	public PedidoRequestDTO() {
 		// TODO Auto-generated constructor stub
 	}
 
 	public PedidoRequestDTO(Pedido pedido) {
 		super();
+		this.idPedido = pedido.getIdPedido();
 		this.dataPedido = pedido.getDataPedido();
 		this.dataEntrega = pedido.getDataEntrega();
 		this.dataEnvio = pedido.getDataEnvio();
 		this.status = pedido.getStatus();
 	}
+	
+	
 
-	public LocalDate getDataPedido() {
+	public Long getIdPedido() {
+        return idPedido;
+    }
+
+    public void setIdPedido(Long idPedido) {
+        this.idPedido = idPedido;
+    }
+
+    public LocalDate getDataPedido() {
 		return dataPedido;
 	}
 

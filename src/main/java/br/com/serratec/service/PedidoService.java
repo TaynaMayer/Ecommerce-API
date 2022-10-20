@@ -50,9 +50,11 @@ public class PedidoService {
     public PedidoResponseDTO inserir(PedidoRequestDTO pedidoInserirDTO) {
 
         Pedido pedido = new Pedido();
+        pedido.setIdPedido(pedidoInserirDTO.getIdPedido());
         pedido.setDataEntrega(pedidoInserirDTO.getDataEntrega());
         pedido.setDataEnvio(pedidoInserirDTO.getDataEnvio());
         pedido.setDataPedido(pedidoInserirDTO.getDataPedido());
+        pedido.setStatus(pedidoInserirDTO.getStatus());
         pedido = pedidoRepository.save(pedido);
 
         return new PedidoResponseDTO(pedido);
