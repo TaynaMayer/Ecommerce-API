@@ -59,7 +59,7 @@ public class ClienteService {
 		clienteModel.setIdCliente(null);
 		clienteModel =  repositorio.save(clienteModel);
 		
-        if(Cliente.getEmail() == null) {
+        if(clienteModel.getEmail() == null) {
 			throw new ResourceBadRequestException("Deu ruim mano, esqueceu de passar o e-mail.");
 		}
 

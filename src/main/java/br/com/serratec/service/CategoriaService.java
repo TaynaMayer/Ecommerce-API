@@ -10,10 +10,8 @@ import org.springframework.stereotype.Service;
 
 import br.com.serratec.dto.CategoriaRequestDTO;
 import br.com.serratec.dto.CategoriaResponseDTO;
-import br.com.serratec.exception.ResourceBadRequestException;
 import br.com.serratec.exception.ResourceNotFoundException;
 import br.com.serratec.model.Categoria;
-import br.com.serratec.model.Cliente;
 import br.com.serratec.repository.CategoriaRepository;
 
 @Service
@@ -60,10 +58,6 @@ public class CategoriaService {
 		categoriaModel.setIdCategoria(null);
 		categoriaModel =  repositorio.save(categoriaModel);
 		
-		if(Cliente.getEmail() == null) {
-			throw new ResourceBadRequestException("Deu ruim mano, esqueceu de passar o e-mail.");
-		}
-
 		return mapper.map(categoriaModel, CategoriaResponseDTO.class);
 		
 	}
