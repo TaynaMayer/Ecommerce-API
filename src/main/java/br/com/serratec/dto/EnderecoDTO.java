@@ -16,19 +16,15 @@ public class EnderecoDTO {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idEndereco;
 	
-	private String cep;
-	
-	private String rua;
-	
-	private String bairro;
-	
-	private String cidade;
-	
-	private Integer numero;
-	
-	private String complemento;
-	
-	private String estado;
+private String cep;
+    
+    private String logradouro;
+    
+    private String bairro;
+    
+    private String localidade;
+    
+    private String uf;
 	
 	
     private List<Cliente> listaCliente;
@@ -41,17 +37,14 @@ public class EnderecoDTO {
 	public EnderecoDTO(Endereco endereco) {
 		super();
         this.cep = endereco.getCep();
-        this.rua = endereco.getRua();
-        this.complemento = endereco.getComplemento();
+        this.logradouro = endereco.getLogradouro();        
         this.bairro = endereco.getBairro();
-        this.cidade = endereco.getLocalidade();
-        this.numero = endereco.getNumero();
-        this.estado = endereco.getEstado();
+        this.localidade = endereco.getLocalidade();
+        this.uf = endereco.getUf();
+       
 	}
 
-
-
-	public Long getIdEndereco() {
+    public Long getIdEndereco() {
         return idEndereco;
     }
 
@@ -60,59 +53,55 @@ public class EnderecoDTO {
     }
 
     public String getCep() {
-		return cep;
-	}
+        return cep;
+    }
 
-	public void setCep(String cep) {
-		this.cep = cep;
-	}
+    public void setCep(String cep) {
+        this.cep = cep;
+    }
 
-	public String getRua() {
-		return rua;
-	}
+    public String getLogradouro() {
+        return logradouro;
+    }
 
-	public void setRua(String rua) {
-		this.rua = rua;
-	}
+    public void setLogradouro(String logradouro) {
+        this.logradouro = logradouro;
+    }
 
-	public String getBairro() {
-		return bairro;
-	}
+    public String getBairro() {
+        return bairro;
+    }
 
-	public void setBairro(String bairro) {
-		this.bairro = bairro;
-	}
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
+    }
 
-	public String getCidade() {
-		return cidade;
-	}
+    public String getLocalidade() {
+        return localidade;
+    }
 
-	public void setCidade(String cidade) {
-		this.cidade = cidade;
-	}
+    public void setLocalidade(String localidade) {
+        this.localidade = localidade;
+    }
 
-	public Integer getNumero() {
-		return numero;
-	}
+    public String getUf() {
+        return uf;
+    }
 
-	public void setNumero(Integer numero) {
-		this.numero = numero;
-	}
+    public void setUf(String uf) {
+        this.uf = uf;
+    }
 
-	public String getComplemento() {
-		return complemento;
-	}
+    public List<Cliente> getListaCliente() {
+        return listaCliente;
+    }
 
-	public void setComplemento(String complemento) {
-		this.complemento = complemento;
-	}
+    public void setListaCliente(List<Cliente> listaCliente) {
+        this.listaCliente = listaCliente;
+    }
 
-	public String getEstado() {
-		return estado;
-	}
 
-	public void setEstado(String estado) {
-		this.estado = estado;
-	}
+
+	
 
 }
