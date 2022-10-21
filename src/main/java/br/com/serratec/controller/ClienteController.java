@@ -3,6 +3,8 @@ package br.com.serratec.controller;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,13 +38,13 @@ public class ClienteController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<ClienteResponseDTO> cadastrar(@RequestBody ClienteRequestDTO cliente) {
+	public ResponseEntity<ClienteResponseDTO> cadastrar(@Valid @RequestBody ClienteRequestDTO cliente) {
 		ClienteResponseDTO dto = servico.cadastrar(cliente);
 		return new ResponseEntity<>(dto, HttpStatus.CREATED);
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<ClienteResponseDTO> atualizar( @PathVariable Long id, @RequestBody ClienteRequestDTO cliente) {
+	public ResponseEntity<ClienteResponseDTO> atualizar( @PathVariable Long id, @Valid @RequestBody ClienteRequestDTO cliente) {
 		ClienteResponseDTO dto = servico.atualizar(id, cliente);		
 		return ResponseEntity.ok(dto);
 	}

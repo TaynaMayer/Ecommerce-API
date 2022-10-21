@@ -9,6 +9,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.Email;
+
+import org.hibernate.validator.constraints.br.CPF;
 
 @Entity
 public class Cliente {
@@ -18,6 +21,7 @@ public class Cliente {
 	@Column(name = "id_cliente")
 	private Long idCliente;
 	
+	@Email(message = "Preencha o email corretamente!")
 	private String email;
 	
 	@Column(name = "nome_usuario")
@@ -28,6 +32,7 @@ public class Cliente {
 	
 	private String senha;
 	
+	@CPF(message = "Preencha com a numeração correta!")
 	private String cpf;
 	
 	private String telefone;

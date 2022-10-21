@@ -2,18 +2,22 @@ package br.com.serratec.dto;
 
 import java.time.LocalDate;
 
+import javax.validation.constraints.Email;
+
+import org.hibernate.validator.constraints.br.CPF;
+
 import br.com.serratec.model.Cliente;
 
 public class ClienteRequestDTO {
 	
+    @Email(message = "Preencha o email corretamente, animal!")
 	private String email;
 	
 	private String nomeUsuario;
 	
 	private String nomeCompleto;
 	
-	private String senha;
-	
+	@CPF(message = "Preencha o CPF corretamente...")
 	private String cpf;
 	
 	private String telefone;
@@ -29,7 +33,6 @@ public class ClienteRequestDTO {
 		this.email = cliente.getEmail();
 		this.nomeUsuario = cliente.getNomeUsuario();
 		this.nomeCompleto = cliente.getNomeCompleto();
-		this.senha = cliente.getSenha();
 		this.cpf = cliente.getCpf();
 		this.telefone = cliente.getTelefone();
 		this.dataNascimento = cliente.getDataNascimento();
@@ -57,14 +60,6 @@ public class ClienteRequestDTO {
 
 	public void setNomeCompleto(String nomeCompleto) {
 		this.nomeCompleto = nomeCompleto;
-	}
-
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
 	}
 
 	public String getCpf() {

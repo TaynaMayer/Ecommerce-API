@@ -22,17 +22,13 @@ public class ProdutoResponseDTO {
 	
 	private String descricao;
 	
-	@Column(name = "qtd_estoque")
 	private Integer qtdEstoque;
-	
-	@Column(name = "data_cadastro")
+		
 	private LocalDate dataCadastro;
 	
-	@Column(name = "valor_unitario")
 	private Double valorUnitario;
 	
-	@ManyToOne
-	@JoinColumn(name = "id_categoria")
+	//@JoinColumn(name = "id_categoria")
 	private Categoria categoria;
 	
 	public ProdutoResponseDTO() {
@@ -42,6 +38,8 @@ public class ProdutoResponseDTO {
 	public ProdutoResponseDTO(Produto produto) {
 		super();
 		this.nome = produto.getNome();
+		this.categoria = produto.getCategoria();
+		this.idProduto = produto.getIdProduto();
 		this.descricao = produto.getDescricao();
 		this.qtdEstoque = produto.getQtdEstoque();
 		this.dataCadastro = produto.getDataCadastro();

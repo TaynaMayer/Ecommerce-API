@@ -6,8 +6,10 @@ import br.com.serratec.model.Categoria;
 import br.com.serratec.model.Produto;
 
 public class ProdutoRequestDTO {
-	
-	private String nome;
+    
+    private Long idProduto;
+
+    private String nome;
 	
 	private String descricao;
 	
@@ -26,12 +28,22 @@ public class ProdutoRequestDTO {
 
 	public ProdutoRequestDTO(Produto produto) {
 		super();
+		this.idProduto = produto.getIdProduto();
+		this.categoria = produto.getCategoria();
 		this.nome = produto.getNome();
 		this.descricao = produto.getDescricao();
 		this.qtdEstoque = produto.getQtdEstoque();
 		this.dataCadastro = produto.getDataCadastro();
 		this.valorUnitario = produto.getValorUnitario();
 	}
+	
+	public Long getIdProduto() {
+        return idProduto;
+    }
+
+    public void setIdProduto(Long idProduto) {
+        this.idProduto = idProduto;
+    }
 
 	public String getNome() {
 		return nome;

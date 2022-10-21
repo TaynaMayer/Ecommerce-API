@@ -53,6 +53,10 @@ public class ProdutoService {
         Produto produto = new Produto();
         produto.setCategoria(produtoInserirDTO.getCategoria());
         produto.setDataCadastro(produtoInserirDTO.getDataCadastro());
+        produto.setIdProduto(produtoInserirDTO.getIdProduto());
+        produto.setNome(produtoInserirDTO.getNome());
+        produto.setQtdEstoque(produtoInserirDTO.getQtdEstoque());
+        produto.setValorUnitario(produtoInserirDTO.getValorUnitario());
         produto.setDescricao(produtoInserirDTO.getDescricao());
         produto = produtoRepository.save(produto);
 
