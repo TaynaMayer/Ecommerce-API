@@ -10,16 +10,21 @@ import org.springframework.stereotype.Service;
 
 import br.com.serratec.dto.ClienteRequestDTO;
 import br.com.serratec.dto.ClienteResponseDTO;
+import br.com.serratec.exception.EmailException;
 import br.com.serratec.exception.ResourceBadRequestException;
 import br.com.serratec.exception.ResourceNotFoundException;
 import br.com.serratec.model.Cliente;
 import br.com.serratec.repository.ClienteRepository;
+import br.com.serratec.repository.EnderecoRepository;
 
 
 @Service
 public class ClienteService {
     @Autowired
 	private ClienteRepository repositorio;
+    
+    @Autowired
+    private EnderecoRepository enderecoRepository;
 	
 	public List<ClienteResponseDTO> obterTodos(){
 		
@@ -86,4 +91,21 @@ public class ClienteService {
 		}
 		repositorio.deleteById(id);
 	}
+	
+//	public ClienteResponseDTO inserir(ClienteRequestDTO clienteInserirDTO) {
+//        if (repositorio.findByEmail(clienteInserirDTO.getEmail()) != null) {
+//            throw new EmailException("Email já existe na base");
+//        }
+//        Cliente cliente = new Cliente();
+//        cliente.setNomeUsuario(clienteInserirDTO.getNomeUsuario());
+//        cliente.setEmail(clienteInserirDTO.getEmail());
+//        //cliente.setSenha(bCryptPasswordEncoder.encode(clienteInserirDTO.getSenha()));
+//        cliente = repositorio.save(cliente);  
+                   
+       // }
+//	    enderecoRepository.saveAll(clienteInserirDTO.get());
+//        EmailConfig.sendEmail(cliente.getEmail(), "Cadastro de Usuário", cliente.toString());
+//        return new ClienteResponseDTO(cliente);
+//    }
+
 }
