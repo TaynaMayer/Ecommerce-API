@@ -2,7 +2,6 @@ package br.com.serratec.model;
 
 import java.util.List;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,17 +21,15 @@ public class Endereco {
 	
 	private String cep;
 	
-	private String rua;
+	private String logradouro;
 	
 	private String bairro;
 	
 	private String localidade;
 	
-	private Integer numero;
+	private String uf;
 	
-	private String complemento;
 	
-	private String estado;
 	
 	@OneToMany(mappedBy = "endereco")
     @JsonIgnore
@@ -57,13 +54,7 @@ public class Endereco {
 		this.cep = cep;
 	}
 
-	public String getRua() {
-		return rua;
-	}
-
-	public void setRua(String rua) {
-		this.rua = rua;
-	}
+	
 
 	public String getBairro() {
 		return bairro;
@@ -83,27 +74,29 @@ public class Endereco {
         this.localidade = localidade;
     }
 
-    public Integer getNumero() {
-		return numero;
-	}
+    public String getLogradouro() {
+        return logradouro;
+    }
 
-	public void setNumero(Integer numero) {
-		this.numero = numero;
-	}
+    public void setLogradouro(String logradouro) {
+        this.logradouro = logradouro;
+    }
 
-	public String getComplemento() {
-		return complemento;
-	}
+    public String getUf() {
+        return uf;
+    }
 
-	public void setComplemento(String complemento) {
-		this.complemento = complemento;
-	}
+    public void setUf(String uf) {
+        this.uf = uf;
+    }
 
-	public String getEstado() {
-		return estado;
-	}
+    public List<Cliente> getClienteList() {
+        return clienteList;
+    }
 
-	public void setEstado(String estado) {
-		this.estado = estado;
-	}
+    public void setClienteList(List<Cliente> clienteList) {
+        this.clienteList = clienteList;
+    }
+
+    
 }
