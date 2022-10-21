@@ -7,6 +7,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import br.com.serratec.dto.PedidoResponseDTO;
+import br.com.serratec.exception.ResourceNotFoundException;
 import br.com.serratec.dto.PedidoRequestDTO;
 import br.com.serratec.model.Pedido;
 import br.com.serratec.repository.PedidoRepository;
@@ -37,10 +38,10 @@ public class PedidoService {
         Optional<Pedido> optPedido = pedidoRepository.findById(id);
 
         if (optPedido.isEmpty()) {
-            // Aqui lanço um exception
-            // Not found
+          //Aqui lanço um exception
+            throw new ResourceNotFoundException("Não foi possível encontrar um cliente com id: " + id);
         }
-
+        
         var pedidoDTO = new ModelMapper().map(optPedido.get(), PedidoResponseDTO.class);
 
         return Optional.of(pedidoDTO);
@@ -75,7 +76,8 @@ public class PedidoService {
         var optPedido = obterPorId(id);
 
         if (optPedido.isEmpty()) {
-            // Lançar uma exception
+          //Aqui lanço um exception
+            throw new ResourceNotFoundException("Não foi possível encontrar um cliente com id: " + id);
         }
 
         pedidoRepository.deleteById(id);
