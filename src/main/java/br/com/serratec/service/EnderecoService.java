@@ -1,5 +1,6 @@
 package br.com.serratec.service;
 
+import java.io.IOException;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,9 +8,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.multipart.MultipartFile;
 
 import br.com.serratec.dto.EnderecoDTO;
 import br.com.serratec.model.Endereco;
+import br.com.serratec.model.Endereco;
+import br.com.serratec.model.Cliente;
 import br.com.serratec.repository.EnderecoRepository;
 
 @Service
@@ -43,6 +47,17 @@ public class EnderecoService {
         endereco = enderecoRepository.save(endereco);
         return endereco;
     }
+    
+    public Endereco inserir(Cliente cliente) throws IOException {
+        Endereco endereco = new Endereco();
+        endereco.setCep(endereco.getCep());
+        endereco.setBairro(endereco.getBairro());
+        endereco.setLocalidade(endereco.getLocalidade());
+        endereco.setLogradouro(endereco.getLogradouro());
+        endereco.setUf(endereco.getUf());
+        return enderecoRepository.save(endereco);
+    }
+
 
         
 	

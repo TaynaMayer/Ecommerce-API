@@ -33,7 +33,7 @@ public class Cliente {
 	private String telefone;
 	
 	@ManyToOne
-	//@JoinColumn(name = "id_endereco", referencedColumnName = "cliente_list")
+	@JoinColumn(name = "id_endereco", referencedColumnName = "cliente_list")
 	private Endereco endereco;
 	
 	@Column(name = "data_nascimento")
