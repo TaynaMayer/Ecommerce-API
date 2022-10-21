@@ -30,8 +30,8 @@ public class EnderecoController {
             @ApiResponse(responseCode="404", description = "Cep não encontrado"),
             @ApiResponse(responseCode="500", description = "Erro na aplicação")
     })
-    public ResponseEntity<Endereco> salvar(@PathVariable String cep) {
-        Endereco dto = enderecoService.salvar(cep);
+    public ResponseEntity<EnderecoDTO> salvar(@PathVariable String cep) {
+        EnderecoDTO dto = enderecoService.buscar(cep);
         if (dto == null) {
             return ResponseEntity.notFound().build();
         }

@@ -1,10 +1,13 @@
 package br.com.serratec.dto;
 
 
+import java.util.List;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import br.com.serratec.model.Cliente;
 import br.com.serratec.model.Endereco;
 
 public class EnderecoDTO {
@@ -27,6 +30,9 @@ public class EnderecoDTO {
 	
 	private String estado;
 	
+	
+    private List<Cliente> listaCliente;
+	
 
 	public EnderecoDTO() {
 		
@@ -38,7 +44,7 @@ public class EnderecoDTO {
         this.rua = endereco.getRua();
         this.complemento = endereco.getComplemento();
         this.bairro = endereco.getBairro();
-        this.cidade = endereco.getCidade();
+        this.cidade = endereco.getLocalidade();
         this.numero = endereco.getNumero();
         this.estado = endereco.getEstado();
 	}
