@@ -2,11 +2,13 @@ package br.com.serratec.dto;
 
 import java.time.LocalDate;
 
-import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Email;
+
+import org.hibernate.validator.constraints.br.CPF;
 
 import br.com.serratec.model.Cliente;
 import br.com.serratec.model.Endereco;
@@ -19,12 +21,11 @@ public class ClienteResponseDTO {
 	
 	private String email;
 	
-	@Column(name = "nome_usuario")
 	private String nomeUsuario;
 	
-	@Column(name = "nome_completo")
 	private String nomeCompleto;
-
+	
+	
     private String cpf;
 	
 	private String telefone;
@@ -32,7 +33,6 @@ public class ClienteResponseDTO {
 	@Embedded
 	private Endereco endereco;
 	
-	@Column(name = "data_nascimento")
 	private LocalDate dataNascimento;
 	
 	public ClienteResponseDTO() {
