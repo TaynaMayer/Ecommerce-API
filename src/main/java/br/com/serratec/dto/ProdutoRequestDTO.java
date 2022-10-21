@@ -18,6 +18,7 @@ public class ProdutoRequestDTO {
 	private Double valorUnitario;
 	
 	private Categoria categoria;
+
 	
 	public ProdutoRequestDTO() {
 		// TODO Auto-generated constructor stub
