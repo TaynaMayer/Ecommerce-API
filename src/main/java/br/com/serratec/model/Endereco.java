@@ -2,6 +2,7 @@ package br.com.serratec.model;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -33,7 +34,7 @@ public class Endereco {
 	
 	@OneToMany(mappedBy = "endereco")
     @JsonIgnore
-   // @Column(name = "cliente_list")
+    @Column(name = "cliente_list")
     private List<Cliente> clienteList;
 	
 	

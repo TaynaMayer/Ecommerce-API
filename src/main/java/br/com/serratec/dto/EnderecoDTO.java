@@ -1,6 +1,5 @@
 package br.com.serratec.dto;
 
-
 import java.util.List;
 
 import javax.persistence.GeneratedValue;
@@ -11,38 +10,36 @@ import br.com.serratec.model.Cliente;
 import br.com.serratec.model.Endereco;
 
 public class EnderecoDTO {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long idEndereco;
-	
-private String cep;
-    
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long idEndereco;
+
+    private String cep;
+
     private String logradouro;
-    
+
     private String bairro;
-    
+
     private String localidade;
-    
+
     private String uf;
-	
-	
+
     private List<Cliente> listaCliente;
-	
 
-	public EnderecoDTO() {
-		
-	}
+    public EnderecoDTO() {
 
-	public EnderecoDTO(Endereco endereco) {
-		super();
+    }
+
+    public EnderecoDTO(Endereco endereco) {
+        super();
         this.cep = endereco.getCep();
-        this.logradouro = endereco.getLogradouro();        
+        this.logradouro = endereco.getLogradouro();
         this.bairro = endereco.getBairro();
         this.localidade = endereco.getLocalidade();
         this.uf = endereco.getUf();
-       
-	}
+
+    }
 
     public Long getIdEndereco() {
         return idEndereco;
@@ -99,9 +96,5 @@ private String cep;
     public void setListaCliente(List<Cliente> listaCliente) {
         this.listaCliente = listaCliente;
     }
-
-
-
-	
 
 }
