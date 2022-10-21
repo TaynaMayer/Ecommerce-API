@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.serratec.dto.ProdutoRequestDTO;
 import br.com.serratec.dto.ProdutoResponseDTO;
+import br.com.serratec.exception.ResourceNotFoundException;
 import br.com.serratec.model.Produto;
 import br.com.serratec.repository.ProdutoRepository;
 
@@ -37,8 +38,8 @@ public class ProdutoService {
         Optional<Produto> optProduto = produtoRepository.findById(id);
 
         if (optProduto.isEmpty()) {
-            // Aqui lanço um exception
-            // Not found
+          //Aqui lanço um exception
+            throw new ResourceNotFoundException("Não foi possível encontrar um cliente com id: " + id);
         }
 
         var produtoDTO = new ModelMapper().map(optProduto.get(), ProdutoResponseDTO.class);
@@ -74,7 +75,8 @@ public class ProdutoService {
         var optProduto = obterPorId(id);
         
         if(optProduto.isEmpty()) {
-            // Lançar uma exception
+          //Aqui lanço um exception
+            throw new ResourceNotFoundException("Não foi possível encontrar um cliente com id: " + id);
         }
         
         produtoRepository.deleteById(id);
