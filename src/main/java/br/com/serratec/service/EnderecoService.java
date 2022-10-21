@@ -26,29 +26,25 @@ public class EnderecoService {
             String uri = "http://viacep.com.br/ws/" + cep + "/json";
             Optional<Endereco> enderecoViaCep = Optional.ofNullable(rs.getForObject(uri, Endereco.class));
             if (enderecoViaCep.get().getCep() != null) {
+                
+               
                 String cepSemTraco = enderecoViaCep.get().getCep().replaceAll("-", "");
                 enderecoViaCep.get().setCep(cepSemTraco);
-                return new EnderecoDTO(enderecoViaCep.get());
+                
+                return new EnderecoDTO(inserir(enderecoViaCep.get()));
+                
             } else {
                 throw new HttpClientErrorException(HttpStatus.NOT_FOUND);
             }
         }
     }
 
-    public Endereco salvar(String cep) {
-        EnderecoDTO ent = buscar(cep);
-
-        Endereco endereco = new Endereco();
-        endereco.setBairro(ent.getBairro());
-        endereco.setCep(ent.getCep());
-        endereco.setIdEndereco(ent.getIdEndereco());
-        endereco.setCidade(ent.getCidade());
-        endereco.setEstado(ent.getEstado());
-
+    public Endereco inserir(Endereco endereco) {
         endereco = enderecoRepository.save(endereco);
-
         return endereco;
+    }
+
         
-	}
+	
 
 }
