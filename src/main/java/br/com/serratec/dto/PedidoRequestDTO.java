@@ -8,6 +8,8 @@ public class PedidoRequestDTO {
 	
     private Long idPedido;
     
+    private Long idCliente; 
+    
 	private LocalDate dataPedido;
 	
 	private LocalDate dataEntrega;
@@ -32,7 +34,15 @@ public class PedidoRequestDTO {
 	
 	
 
-	public Long getIdPedido() {
+	public Long getIdCliente() {
+        return idCliente;
+    }
+
+    public void setIdCliente(Long idCliente) {
+        this.idCliente = idCliente;
+    }
+
+    public Long getIdPedido() {
         return idPedido;
     }
 

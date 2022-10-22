@@ -17,95 +17,94 @@ import br.com.serratec.model.Cliente;
 import br.com.serratec.repository.ClienteRepository;
 import br.com.serratec.repository.EnderecoRepository;
 
-
 @Service
 public class ClienteService {
     @Autowired
-	private ClienteRepository repositorio;
-    
-    @Autowired
-    private EnderecoRepository enderecoRepository;
-	
-	public List<ClienteResponseDTO> obterTodos(){
-		
-		List<Cliente> clientes = repositorio.findAll();
-		ModelMapper mapper = new ModelMapper();
-		
-		// Aqui eu pego a lista de Cliente (Modelo), e converto uma a uma em um ClienteResponseDTO.
-		//No final devolvo a lista convertida.
-		return clientes.stream()
-				.map(cliente -> mapper.map(cliente, ClienteResponseDTO.class))
-				.collect(Collectors.toList());
-		
-		
-	}
-	
-	public Optional<ClienteResponseDTO> obterPorId(Long id){
-		
-		Optional<Cliente> optCliente = repositorio.findById(id);
-		
-		if(optCliente.isEmpty()) {
-			//Aqui lanço um exception
-			throw new ResourceNotFoundException("Não foi possível encontrar um cliente com id: " + id);
-		}
-		
-		var clienteDTO = new ModelMapper().map(optCliente.get(), ClienteResponseDTO.class);
-		
-		return Optional.of(clienteDTO);
+    private ClienteRepository repositorio;
 
-	}
-	
-	public ClienteResponseDTO cadastrar(ClienteRequestDTO clienteDto) {
-		ModelMapper mapper = new ModelMapper();
-		
-		var clienteModel = mapper.map(clienteDto, Cliente.class);
-		
-		
-		clienteModel.setIdCliente(null);
-		clienteModel =  repositorio.save(clienteModel);
-		
-        if(clienteModel.getEmail() == null) {
-			throw new ResourceBadRequestException("Deu ruim mano, esqueceu de passar o e-mail.");
-		}
+//    @Autowired
+//    private EnderecoRepository enderecoRepository;
 
-		return mapper.map(clienteModel, ClienteResponseDTO.class);
-		
-	}
-	
-	public ClienteResponseDTO atualizar(Long id, ClienteRequestDTO clienteDTO){
-		ModelMapper mapper = new ModelMapper();
+//    @Autowired
+//    private EmailConfig emailConfig;
 
-		var clienteModel = mapper.map(clienteDTO, Cliente.class);
+    public List<ClienteResponseDTO> obterTodos() {
 
-		clienteModel.setIdCliente(id);
-		clienteModel =  repositorio.save(clienteModel);
+        List<Cliente> clientes = repositorio.findAll();
+        ModelMapper mapper = new ModelMapper();
 
-		return mapper.map(clienteModel, ClienteResponseDTO.class);
-	}
+        // Aqui eu pego a lista de Cliente (Modelo), e converto uma a uma em um
+        // ClienteResponseDTO.
+        // No final devolvo a lista convertida.
+        return clientes.stream()
+                .map(cliente -> mapper.map(cliente, ClienteResponseDTO.class))
+                .collect(Collectors.toList());
 
-	public void deletar(Long id){
-		var optCliente = obterPorId(id);
+    }
 
-		if(optCliente.isEmpty()){
-			//lancar exception
-		}
-		repositorio.deleteById(id);
-	}
-	
-//	public ClienteResponseDTO inserir(ClienteRequestDTO clienteInserirDTO) {
+    public Optional<ClienteResponseDTO> obterPorId(Long id) {
+
+        Optional<Cliente> optCliente = repositorio.findById(id);
+
+        if (optCliente.isEmpty()) {
+            // Aqui lanço um exception
+            throw new ResourceNotFoundException("Não foi possível encontrar um cliente com id: " + id);
+        }
+
+        var clienteDTO = new ModelMapper().map(optCliente.get(), ClienteResponseDTO.class);
+
+        return Optional.of(clienteDTO);
+
+    }
+
+    public ClienteResponseDTO cadastrar(ClienteRequestDTO clienteDto) {
+        ModelMapper mapper = new ModelMapper();
+
+        var clienteModel = mapper.map(clienteDto, Cliente.class);
+
+        clienteModel.setIdCliente(null);
+        clienteModel = repositorio.save(clienteModel);
+
+        if (clienteModel.getEmail() == null) {
+            throw new ResourceBadRequestException("Deu ruim mano, esqueceu de passar o e-mail.");
+        }
+
+        return mapper.map(clienteModel, ClienteResponseDTO.class);
+
+    }
+
+    public ClienteResponseDTO atualizar(Long id, ClienteRequestDTO clienteDTO) {
+        ModelMapper mapper = new ModelMapper();
+
+        var clienteModel = mapper.map(clienteDTO, Cliente.class);
+
+        clienteModel.setIdCliente(id);
+        clienteModel = repositorio.save(clienteModel);
+
+        return mapper.map(clienteModel, ClienteResponseDTO.class);
+    }
+
+    public void deletar(Long id) {
+        var optCliente = obterPorId(id);
+
+        if (optCliente.isEmpty()) {
+            // lancar exception
+        }
+        repositorio.deleteById(id);
+    }
+
+//    public ClienteResponseDTO inserir(ClienteRequestDTO clienteInserirDTO) {
 //        if (repositorio.findByEmail(clienteInserirDTO.getEmail()) != null) {
 //            throw new EmailException("Email já existe na base");
 //        }
 //        Cliente cliente = new Cliente();
 //        cliente.setNomeUsuario(clienteInserirDTO.getNomeUsuario());
 //        cliente.setEmail(clienteInserirDTO.getEmail());
-//        //cliente.setSenha(bCryptPasswordEncoder.encode(clienteInserirDTO.getSenha()));
-//        cliente = repositorio.save(cliente);  
-                   
-       // }
-//	    enderecoRepository.saveAll(clienteInserirDTO.get());
-//        EmailConfig.sendEmail(cliente.getEmail(), "Cadastro de Usuário", cliente.toString());
+        // cliente.setSenha(bCryptPasswordEncoder.encode(clienteInserirDTO.getSenha()));
+        //cliente = repositorio.save(cliente);
+         //enderecoRepository.save();
+//        emailConfig.sendEmail(cliente.getEmail(), "Cadastro de Usuário",
+//        cliente.toString());
 //        return new ClienteResponseDTO(cliente);
 //    }
-
 }

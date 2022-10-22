@@ -7,6 +7,7 @@ import javax.validation.constraints.Email;
 import org.hibernate.validator.constraints.br.CPF;
 
 import br.com.serratec.model.Cliente;
+import br.com.serratec.model.Endereco;
 
 public class ClienteRequestDTO {
 	
@@ -17,10 +18,14 @@ public class ClienteRequestDTO {
 	
 	private String nomeCompleto;
 	
+	private Long idCliente;
+	
 	@CPF(message = "Preencha o CPF corretamente...")
 	private String cpf;
 	
 	private String telefone;
+	
+	private Endereco endereco;
 	
 	private LocalDate dataNascimento;
 	
@@ -36,9 +41,31 @@ public class ClienteRequestDTO {
 		this.cpf = cliente.getCpf();
 		this.telefone = cliente.getTelefone();
 		this.dataNascimento = cliente.getDataNascimento();
-	}
+		this.endereco = cliente.getEndereco();
+		}	
+	
+	
 
-	public String getEmail() {
+
+    
+	
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
+
+    public Long getIdCliente() {
+        return idCliente;
+    }
+
+    public void setIdCliente(Long idCliente) {
+        this.idCliente = idCliente;
+    }
+
+    public String getEmail() {
 		return email;
 	}
 

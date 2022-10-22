@@ -6,10 +6,6 @@ import javax.persistence.Embedded;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.Email;
-
-import org.hibernate.validator.constraints.br.CPF;
-
 import br.com.serratec.model.Cliente;
 import br.com.serratec.model.Endereco;
 
@@ -47,6 +43,7 @@ public class ClienteResponseDTO {
 		this.cpf = cliente.getCpf();
 		this.telefone = cliente.getTelefone();
 		this.dataNascimento = cliente.getDataNascimento();
+		
 	}
 	
 	public Long getIdCliente() {
