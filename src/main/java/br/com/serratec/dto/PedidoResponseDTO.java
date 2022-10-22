@@ -1,27 +1,18 @@
 package br.com.serratec.dto;
 
 import java.time.LocalDate;
-
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-
 import br.com.serratec.model.Pedido;
 
 public class PedidoResponseDTO {
 	
 	@Id
-	private Long idPedido;
+	private Long idPedido;		
+
+	private LocalDate dataPedido;	
 	
-	@Column(name = "data_pedido")
-	private LocalDate dataPedido;
+	private LocalDate dataEntrega;	
 	
-	@Column(name = "data_entrega")
-	private LocalDate dataEntrega;
-	
-	@Column(name = "data_envio")
 	private LocalDate dataEnvio;
 	
 	private String status;
@@ -40,7 +31,8 @@ public class PedidoResponseDTO {
 	}
 	
 	
-	public Long getIdPedido() {
+
+    public Long getIdPedido() {
         return idPedido;
     }
     

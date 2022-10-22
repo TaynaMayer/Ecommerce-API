@@ -1,24 +1,19 @@
 package br.com.serratec.model;
-
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 
 @Entity
 public class Endereco {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	//@Column(name = "id_endereco")
+	@Column(name = "id_endereco")
 	private Long idEndereco;
+	
+	private Long idCliente;
 	
 	private String cep;
 	
@@ -28,18 +23,17 @@ public class Endereco {
 	
 	private String localidade;
 	
-	private String uf;
+	private String uf;		
 	
-	
-	
-	@OneToMany(mappedBy = "endereco")
-    @JsonIgnore
-    @Column(name = "cliente_list")
-    private List<Cliente> clienteList;
-	
-	
+	public Long getIdCliente() {
+        return idCliente;
+    }
 
-	public Long getIdEndereco() {
+    public void setIdCliente(Long idCliente) {
+        this.idCliente = idCliente;
+    }
+
+    public Long getIdEndereco() {
 		return idEndereco;
 	}
 
@@ -91,13 +85,7 @@ public class Endereco {
         this.uf = uf;
     }
 
-    public List<Cliente> getClienteList() {
-        return clienteList;
-    }
-
-    public void setClienteList(List<Cliente> clienteList) {
-        this.clienteList = clienteList;
-    }
+   
 
     
 }

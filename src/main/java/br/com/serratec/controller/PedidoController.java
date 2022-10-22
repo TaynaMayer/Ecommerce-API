@@ -39,7 +39,9 @@ public class PedidoController {
 	   }
 
 	@PostMapping
-	public ResponseEntity<Object> inserir(@Valid @RequestBody PedidoRequestDTO pedidoInserirDTO) {
+	public ResponseEntity<Object> inserir(@Valid @RequestBody PedidoRequestDTO pedidoInserirDTO) {   
+	    
+	    
 		try {
 			PedidoResponseDTO pedidoDTO= pedidoService.inserir(pedidoInserirDTO);
 			URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
@@ -49,6 +51,7 @@ public class PedidoController {
 		} catch (EmailException e) {
 			return ResponseEntity.unprocessableEntity().body(e.getMessage());
 		}
+		
 	}
 	
 	@PutMapping("/{id}")

@@ -30,29 +30,40 @@ public class Cliente {
 	@Column(name = "nome_completo")
 	private String nomeCompleto;
 	
-	private String senha;
+	private String senha;	
 	
 	@CPF(message = "Preencha com a numeração correta!")
 	private String cpf;
 	
-	private String telefone;
+	private String telefone;	
 	
 	@ManyToOne
-	//@JoinColumn(name = "id_endereco", referencedColumnName = "cliente_list")
+	@JoinColumn(name = "id_endereco")
 	private Endereco endereco;
+	
 	
 	@Column(name = "data_nascimento")
 	private LocalDate dataNascimento;
 
-	public Long getIdCliente() {
+
+    public Long getIdCliente() {
 		return idCliente;
 	}
 
-	public void setIdCliente(Long idCliente) {
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
+
+    public void setIdCliente(Long idCliente) {
 		this.idCliente = idCliente;
 	}
 
-	public String getEmail() {
+
+    public String getEmail() {
 		return email;
 	}
 
