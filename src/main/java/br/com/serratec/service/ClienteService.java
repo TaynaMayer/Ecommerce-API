@@ -7,7 +7,9 @@ import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import br.com.serratec.config.EmailConfig;
 import br.com.serratec.dto.ClienteRequestDTO;
 import br.com.serratec.dto.ClienteResponseDTO;
 import br.com.serratec.exception.EmailException;
@@ -20,17 +22,16 @@ import br.com.serratec.repository.EnderecoRepository;
 @Service
 public class ClienteService {
     @Autowired
-    private ClienteRepository repositorio;
+    private ClienteRepository clienteRepository;
 
-//    @Autowired
-//    private EnderecoRepository enderecoRepository;
+    private EnderecoRepository enderecoRepository;
 
-//    @Autowired
-//    private EmailConfig emailConfig;
+    @Autowired
+    private EmailConfig emailConfig;
 
     public List<ClienteResponseDTO> obterTodos() {
 
-        List<Cliente> clientes = repositorio.findAll();
+        List<Cliente> clientes = clienteRepository.findAll();
         ModelMapper mapper = new ModelMapper();
 
         // Aqui eu pego a lista de Cliente (Modelo), e converto uma a uma em um
@@ -44,7 +45,7 @@ public class ClienteService {
 
     public Optional<ClienteResponseDTO> obterPorId(Long id) {
 
-        Optional<Cliente> optCliente = repositorio.findById(id);
+        Optional<Cliente> optCliente = clienteRepository.findById(id);
 
         if (optCliente.isEmpty()) {
             // Aqui lanço um exception
@@ -63,11 +64,13 @@ public class ClienteService {
         var clienteModel = mapper.map(clienteDto, Cliente.class);
 
         clienteModel.setIdCliente(null);
-        clienteModel = repositorio.save(clienteModel);
+        clienteModel = clienteRepository.save(clienteModel);
 
         if (clienteModel.getEmail() == null) {
             throw new ResourceBadRequestException("Deu ruim mano, esqueceu de passar o e-mail.");
         }
+        
+       emailConfig.sendEmail(clienteModel.getEmail(), "CADASTRO USUARIO", clienteModel.toString());
 
         return mapper.map(clienteModel, ClienteResponseDTO.class);
 
@@ -79,7 +82,7 @@ public class ClienteService {
         var clienteModel = mapper.map(clienteDTO, Cliente.class);
 
         clienteModel.setIdCliente(id);
-        clienteModel = repositorio.save(clienteModel);
+        clienteModel = clienteRepository.save(clienteModel);
 
         return mapper.map(clienteModel, ClienteResponseDTO.class);
     }
@@ -90,21 +93,28 @@ public class ClienteService {
         if (optCliente.isEmpty()) {
             // lancar exception
         }
-        repositorio.deleteById(id);
+        clienteRepository.deleteById(id);
     }
 
-//    public ClienteResponseDTO inserir(ClienteRequestDTO clienteInserirDTO) {
-//        if (repositorio.findByEmail(clienteInserirDTO.getEmail()) != null) {
-//            throw new EmailException("Email já existe na base");
-//        }
-//        Cliente cliente = new Cliente();
-//        cliente.setNomeUsuario(clienteInserirDTO.getNomeUsuario());
-//        cliente.setEmail(clienteInserirDTO.getEmail());
-        // cliente.setSenha(bCryptPasswordEncoder.encode(clienteInserirDTO.getSenha()));
-        //cliente = repositorio.save(cliente);
-         //enderecoRepository.save();
-//        emailConfig.sendEmail(cliente.getEmail(), "Cadastro de Usuário",
-//        cliente.toString());
-//        return new ClienteResponseDTO(cliente);
-//    }
+    public ClienteResponseDTO inserir(ClienteRequestDTO clienteInserirDTO) {
+        if (clienteRepository.findByEmail(clienteInserirDTO.getEmail()) != null) {
+            throw new EmailException("Email já existe na base");
+        }
+        Cliente cliente = new Cliente();
+        cliente.setNomeUsuario(clienteInserirDTO.getNomeUsuario());
+        cliente.setEmail(clienteInserirDTO.getEmail());
+        cliente.setDataNascimento(clienteInserirDTO.getDataNascimento());
+        cliente.setEndereco(clienteInserirDTO.getEndereco());
+        cliente.setNomeCompleto(clienteInserirDTO.getNomeCompleto());
+        cliente.setCpf(clienteInserirDTO.getCpf());
+        cliente.setTelefone(clienteInserirDTO.getTelefone());
+        cliente.setEmail(clienteInserirDTO.getEmail());
+        cliente.setIdCliente(clienteInserirDTO.getIdCliente());
+        
+        //cliente.setSenha(bCryptPasswordEncoder.encode(clienteInserirDTO.getSenha()));
+        cliente = clienteRepository.save(cliente);
+       //  enderecoRepository.save();
+         emailConfig.sendEmail(cliente.getEmail(), "Cadastro de Usuário", cliente.toString());
+        return new ClienteResponseDTO(cliente);
+    }
 }

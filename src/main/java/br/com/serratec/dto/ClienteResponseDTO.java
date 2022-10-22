@@ -37,6 +37,8 @@ public class ClienteResponseDTO {
 
 	public ClienteResponseDTO(Cliente cliente) {
 		super();
+		this.endereco = cliente.getEndereco();
+		this.idCliente = cliente.getIdCliente();
 		this.email = cliente.getEmail();
 		this.nomeUsuario = cliente.getNomeUsuario();
 		this.nomeCompleto = cliente.getNomeCompleto();

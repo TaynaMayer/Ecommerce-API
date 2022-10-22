@@ -1,5 +1,6 @@
 package br.com.serratec.controller;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.serratec.dto.ClienteRequestDTO;
@@ -37,10 +39,17 @@ public class ClienteController {
 		return  ResponseEntity.ok(servico.obterPorId(id));
 	}
 	
+//	@PostMapping
+//	public ResponseEntity<ClienteResponseDTO> cadastrar(@Valid @RequestBody ClienteRequestDTO cliente) {
+//		ClienteResponseDTO dto = servico.cadastrar(cliente);
+//		return new ResponseEntity<>(dto, HttpStatus.CREATED);
+//	}
+	
 	@PostMapping
-	public ResponseEntity<ClienteResponseDTO> cadastrar(@Valid @RequestBody ClienteRequestDTO cliente) {
-		ClienteResponseDTO dto = servico.cadastrar(cliente);
-		return new ResponseEntity<>(dto, HttpStatus.CREATED);
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<ClienteResponseDTO> inserir(@RequestBody ClienteRequestDTO clienteInserirDTO) throws IOException {
+    ClienteResponseDTO clienteDTO = servico.inserir(clienteInserirDTO);
+    return ResponseEntity.status(HttpStatus.CREATED).body(clienteDTO);
 	}
 
 	@PutMapping("/{id}")
