@@ -8,8 +8,8 @@ import br.com.serratec.model.Cliente;
 
 public interface ClienteRepository extends JpaRepository<Cliente, Long> {
     
-//    Cliente findByEmail(String email);
-//
-//    Optional<Cliente> findByNome(String nome);
+      Cliente findByEmail(String email);
+
+     // Optional<Cliente> findByNome(String nome);
 
 }

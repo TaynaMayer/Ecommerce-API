@@ -8,9 +8,7 @@ public class EnderecoDTO {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idEndereco;
-    
-    private Long idCliente; 
+    private Long idEndereco; 
 
     private String cep;
 
@@ -28,25 +26,19 @@ public class EnderecoDTO {
 
     public EnderecoDTO(Endereco endereco) {
         super();
+        
+        this.idEndereco = endereco.getIdEndereco();
         this.cep = endereco.getCep();
         this.logradouro = endereco.getLogradouro();
         this.bairro = endereco.getBairro();
         this.localidade = endereco.getLocalidade();
-        this.idCliente = endereco.getIdCliente();
+        
         this.uf = endereco.getUf();
         
 
     }
     
     
-
-    public Long getIdCliente() {
-        return idCliente;
-    }
-
-    public void setIdCliente(Long idCliente) {
-        this.idCliente = idCliente;
-    }
 
     public Long getIdEndereco() {
         return idEndereco;

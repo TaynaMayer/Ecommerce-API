@@ -35,7 +35,15 @@ public class Cliente {
 	@CPF(message = "Preencha com a numeração correta!")
 	private String cpf;
 	
-	private String telefone;	
+	private String telefone;
+	
+	@Override
+	public String toString() {
+	    
+	    return "Id:" + idCliente + "\n" + "Nome:" + nomeUsuario + "\n" + "Email" + email;
+	}
+	
+	
 	
 	@ManyToOne
 	@JoinColumn(name = "id_endereco")
