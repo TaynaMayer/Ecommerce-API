@@ -32,7 +32,7 @@ public class SwaggerConfig {
 	public ApiInfo apiInfo() {
 		ApiInfo apiInfo = new ApiInfoBuilder()
 				.title("API DO SERRATEC")
-				.description("Essa API foi desenvolvida pelos alunos")
+				.description("Essa API foi desenvolvida pelos alunos do Grupo-1")
 				.license("Apache License 2.0")
 				.licenseUrl("http://www.apache.org/license")
 				.termsOfServiceUrl("/service.html")
