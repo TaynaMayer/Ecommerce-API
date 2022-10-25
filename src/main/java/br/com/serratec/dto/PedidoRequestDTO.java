@@ -5,11 +5,7 @@ import java.time.LocalDate;
 import br.com.serratec.model.Cliente;
 import br.com.serratec.model.Pedido;
 
-public class PedidoRequestDTO {
-	
-    private Long idPedido;
-    
-    private Long idCliente; 
+public class PedidoRequestDTO {	
     
 	private LocalDate dataPedido;
 	
@@ -26,33 +22,14 @@ public class PedidoRequestDTO {
 	}
 
 	public PedidoRequestDTO(Pedido pedido) {
-		super();
-		this.idPedido = pedido.getIdPedido();
+		super();		
 		this.dataPedido = pedido.getDataPedido();
 		this.dataEntrega = pedido.getDataEntrega();
 		this.dataEnvio = pedido.getDataEnvio();
 		this.status = pedido.getStatus();
 		this.cliente = pedido.getCliente();
-	}
+	}	
 	
-	
-
-	public Long getIdCliente() {
-        return idCliente;
-    }
-
-    public void setIdCliente(Long idCliente) {
-        this.idCliente = idCliente;
-    }
-
-    public Long getIdPedido() {
-        return idPedido;
-    }
-
-    public void setIdPedido(Long idPedido) {
-        this.idPedido = idPedido;
-    }
-
     public LocalDate getDataPedido() {
 		return dataPedido;
 	}

@@ -39,7 +39,8 @@ public class Produto {
 	public Long getIdProduto() {
 		return idProduto;
 	}
-
+	
+	
 	public void setIdProduto(Long idProduto) {
 		this.idProduto = idProduto;
 	}

@@ -20,6 +20,8 @@ public class ClienteRequestDTO {
 	
 	private Long idCliente;
 	
+	private String senha;
+	
 	@CPF(message = "Preencha o CPF corretamente...")
 	private String cpf;
 	
@@ -42,13 +44,22 @@ public class ClienteRequestDTO {
 		this.telefone = cliente.getTelefone();
 		this.dataNascimento = cliente.getDataNascimento();
 		this.endereco = cliente.getEndereco();
+		this.senha = cliente.getSenha();
 		}	
 	
 	
-
+	
 
     
 	
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
     public Endereco getEndereco() {
         return endereco;
     }

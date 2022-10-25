@@ -7,12 +7,10 @@ import java.util.List;
 import javax.persistence.Id;
 
 import br.com.serratec.model.Cliente;
-import br.com.serratec.model.ItemPedido;
 import br.com.serratec.model.Pedido;
 
-public class PedidoResponseDTO {
+public class PedidoResponseDTO {	
 	
-	@Id
 	private Long idPedido;		
 
 	private LocalDate dataPedido;	
@@ -23,7 +21,6 @@ public class PedidoResponseDTO {
 	
 	private String status;
 	
-	private List<ItemPedido> itens = new ArrayList<>();
 
 	private Double valorTotal;
 
@@ -39,22 +36,12 @@ public class PedidoResponseDTO {
 		this.dataPedido = pedido.getDataPedido();
 		this.dataEntrega = pedido.getDataEntrega();
 		this.dataEnvio = pedido.getDataEnvio();
-		this.status = pedido.getStatus();
-		this.valorTotal = pedido.getValorTotal();
-		this.itens = pedido.getItens();
+		this.status = pedido.getStatus();			
 		this.cliente = pedido.getCliente();
 	}
-	
-	
+		
 
-    public List<ItemPedido> getItens() {
-		return itens;
-	}
-
-	public void setItens(List<ItemPedido> itens) {
-		this.itens = itens;
-	}
-
+   
 	public Double getValorTotal() {
 		return valorTotal;
 	}

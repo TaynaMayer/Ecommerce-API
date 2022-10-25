@@ -1,25 +1,32 @@
 package br.com.serratec.service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import br.com.serratec.dto.PedidoRequestDTO;
 import br.com.serratec.dto.PedidoResponseDTO;
 import br.com.serratec.exception.ResourceNotFoundException;
-import br.com.serratec.dto.ItemPedidoRequestDTO;
-import br.com.serratec.dto.ItemPedidoResponseDTO;
-import br.com.serratec.dto.PedidoRequestDTO;
-import br.com.serratec.model.ItemPedido;
+import br.com.serratec.model.Cliente;
 import br.com.serratec.model.Pedido;
+import br.com.serratec.model.Produto;
+import br.com.serratec.repository.ClienteRepository;
 import br.com.serratec.repository.PedidoRepository;
+import br.com.serratec.repository.ProdutoRepository;
 
 @Service
 public class PedidoService {
 
     @Autowired
     private PedidoRepository pedidoRepository;
+   
+    
+    @Autowired
+    private ClienteRepository clienteRepository;
     
     private ModelMapper mapper = new ModelMapper();
 
@@ -50,33 +57,21 @@ public class PedidoService {
         return Optional.of(pedidoDTO);
 
     }
-
-    public PedidoResponseDTO inserir(PedidoRequestDTO pedidoInserirDTO) {
-
-        Pedido pedido = new Pedido();
-        pedido.setIdPedido(pedidoInserirDTO.getIdPedido());
+    
+    
+    public PedidoResponseDTO inserir(PedidoRequestDTO pedidoInserirDTO) {        
+       Optional<Cliente> cliente = clienteRepository.findById(pedidoInserirDTO.getCliente().getIdCliente());
+        Pedido pedido = new Pedido();       
         pedido.setDataEntrega(pedidoInserirDTO.getDataEntrega());
         pedido.setDataEnvio(pedidoInserirDTO.getDataEnvio());
-        pedido.setDataPedido(pedidoInserirDTO.getDataPedido());
+        pedido.setDataPedido(LocalDate.now());
         pedido.setStatus(pedidoInserirDTO.getStatus());
-        pedido.setCliente(pedidoInserirDTO.getCliente());
+        pedido.setCliente(cliente.get());
         pedido = pedidoRepository.save(pedido);
-
+        
         return new PedidoResponseDTO(pedido);
 
-    }
-
-
-    public ItemPedidoResponseDTO inserirItemPedido(ItemPedidoRequestDTO itemPedidoDTO){
-
-        ItemPedido itemPedido = new ItemPedido();
-        itemPedido.setPrecoVenda(itemPedidoDTO.getPrecoVenda());
-        itemPedido.setQuantidade(itemPedidoDTO.getQuantidade());
-       
-        return new ItemPedidoResponseDTO(itemPedido);
-
-    }
-
+    }    
 
 
 
