@@ -13,7 +13,7 @@ public class Endereco {
 	@Column(name = "id_endereco")
 	private Long idEndereco;
 	
-	private Long idCliente;
+	
 	
 	private String cep;
 	
@@ -23,15 +23,9 @@ public class Endereco {
 	
 	private String localidade;
 	
-	private String uf;		
+	private String uf;	
 	
-	public Long getIdCliente() {
-        return idCliente;
-    }
-
-    public void setIdCliente(Long idCliente) {
-        this.idCliente = idCliente;
-    }
+	
 
     public Long getIdEndereco() {
 		return idEndereco;

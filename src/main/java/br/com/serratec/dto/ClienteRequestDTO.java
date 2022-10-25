@@ -11,7 +11,7 @@ import br.com.serratec.model.Endereco;
 
 public class ClienteRequestDTO {
 	
-    @Email(message = "Preencha o email corretamente, animal!")
+    @Email(message = "Preencha o email corretamente!")
 	private String email;
 	
 	private String nomeUsuario;

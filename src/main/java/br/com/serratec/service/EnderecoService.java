@@ -35,7 +35,7 @@ public class EnderecoService {
                 String cepSemTraco = enderecoViaCep.get().getCep().replaceAll("-", "");
                 enderecoViaCep.get().setCep(cepSemTraco);
                 
-                return new EnderecoDTO(inserir(enderecoViaCep.get()));
+                return new EnderecoDTO(enderecoViaCep.get());
                 
             } else {
                 throw new HttpClientErrorException(HttpStatus.NOT_FOUND);
@@ -43,20 +43,33 @@ public class EnderecoService {
         }
     }
 
-    public Endereco inserir(Endereco endereco) {
+    public Endereco inserir(String cep) {
+        EnderecoDTO ent = buscar(cep);
+
+        Endereco endereco = new Endereco();
+        endereco.setBairro(ent.getBairro());
+        endereco.setCep(ent.getCep());
+        endereco.setIdEndereco(ent.getIdEndereco());
+        endereco.setLogradouro(ent.getLogradouro());
+        endereco.setLocalidade(ent.getLocalidade());
+        endereco.setUf(ent.getUf());        
+
         endereco = enderecoRepository.save(endereco);
+
         return endereco;
     }
     
-    public Endereco inserir(Cliente cliente) throws IOException {
-        Endereco endereco = new Endereco();
-        endereco.setCep(endereco.getCep());
-        endereco.setBairro(endereco.getBairro());
-        endereco.setLocalidade(endereco.getLocalidade());
-        endereco.setLogradouro(endereco.getLogradouro());
-        endereco.setUf(endereco.getUf());
-        return enderecoRepository.save(endereco);
-    }
+    
+    
+//    public Endereco inserir(Cliente cliente) throws IOException {
+//        Endereco endereco = new Endereco();
+//        endereco.setCep(endereco.getCep());
+//        endereco.setBairro(endereco.getBairro());
+//        endereco.setLocalidade(endereco.getLocalidade());
+//        endereco.setLogradouro(endereco.getLogradouro());
+//        endereco.setUf(endereco.getUf());
+//        return enderecoRepository.save(endereco);
+//    }
 
 
         

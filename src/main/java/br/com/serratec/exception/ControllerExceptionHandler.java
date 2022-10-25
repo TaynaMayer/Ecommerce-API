@@ -24,8 +24,8 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
 
 	@ExceptionHandler(EmailException.class)
 	public ResponseEntity<Object> handleEmailException(EmailException ex) {
-		EmailException emailException = new EmailException(ex.getMessage());
-		return ResponseEntity.unprocessableEntity().body(emailException);
+		
+		return ResponseEntity.unprocessableEntity().body(ex.getMessage());
 	}
 	
 	@ExceptionHandler(HttpClientErrorException.class)
@@ -66,6 +66,11 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
             //Aqui eu estou devolvendo o erro personalizado para o usuario.
             return new ResponseEntity<>(status, HttpStatus.OK);
         }
+	    
+	    @ExceptionHandler(CpfException.class)
+	    public ResponseEntity<Object> handleCpfException(CpfException cpfException) {
+	        return ResponseEntity.unprocessableEntity().body(cpfException.getMessage());
+	    }
 	
 	
 }
