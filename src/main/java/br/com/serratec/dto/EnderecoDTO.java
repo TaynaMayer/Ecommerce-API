@@ -7,8 +7,7 @@ import io.swagger.annotations.ApiModelProperty;
 
 public class EnderecoDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    
     private Long idEndereco; 
 
     @ApiModelProperty(value = "Identificador de uma rua ")
@@ -24,26 +23,45 @@ public class EnderecoDTO {
     
     @ApiModelProperty(value = "Identifica o estado")
     private String uf;   
+    
+    private String complemento;
+    
+    private Integer numero;
 
     public EnderecoDTO() {
 
     }
 
-    public EnderecoDTO(Endereco endereco) {
-        super();
+    public EnderecoDTO(Endereco endereco) {      
         
         this.idEndereco = endereco.getIdEndereco();
-        this.cep = endereco.getCep();
-        this.logradouro = endereco.getRua();
+        this.cep = endereco.getCep();       
         this.bairro = endereco.getBairro();
-        this.localidade = endereco.getLocalidade();
-        
+        this.localidade = endereco.getLocalidade();        
         this.uf = endereco.getUf();
-        
+        this.logradouro = endereco.getLogradouro();
+        this.complemento = endereco.getComplemento();
+        this.numero = endereco.getNumero();
+    }  
+    
+    
+    
 
+    public String getComplemento() {
+        return complemento;
     }
-    
-    
+
+    public void setComplemento(String complemento) {
+        this.complemento = complemento;
+    }
+
+    public Integer getNumero() {
+        return numero;
+    }
+
+    public void setNumero(Integer numero) {
+        this.numero = numero;
+    }
 
     public Long getIdEndereco() {
         return idEndereco;
