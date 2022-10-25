@@ -27,29 +27,24 @@ public class ClienteRequestDTO {
 	
 	private String telefone;
 	
-	private Endereco endereco;
+	private EnderecoInserirDTO endereco;
 	
 	private LocalDate dataNascimento;
 	
 	public ClienteRequestDTO() {
-		// TODO Auto-generated constructor stub
+		
 	}
 
-	public ClienteRequestDTO(Cliente cliente) {
-		super();
+	public ClienteRequestDTO(Cliente cliente) {		
 		this.email = cliente.getEmail();
 		this.nomeUsuario = cliente.getNomeUsuario();
 		this.nomeCompleto = cliente.getNomeCompleto();
 		this.cpf = cliente.getCpf();
 		this.telefone = cliente.getTelefone();
 		this.dataNascimento = cliente.getDataNascimento();
-		this.endereco = cliente.getEndereco();
+		this.endereco = new EnderecoInserirDTO(cliente.getEndereco());
 		this.senha = cliente.getSenha();
 		}	
-	
-	
-	
-
     
 	
     public String getSenha() {
@@ -59,12 +54,14 @@ public class ClienteRequestDTO {
     public void setSenha(String senha) {
         this.senha = senha;
     }
+    
+    
 
-    public Endereco getEndereco() {
+    public EnderecoInserirDTO getEndereco() {
         return endereco;
     }
 
-    public void setEndereco(Endereco endereco) {
+    public void setEndereco(EnderecoInserirDTO endereco) {
         this.endereco = endereco;
     }
 

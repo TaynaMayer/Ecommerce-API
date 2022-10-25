@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import br.com.serratec.config.EmailConfig;
 import br.com.serratec.dto.ClienteRequestDTO;
 import br.com.serratec.dto.ClienteResponseDTO;
+import br.com.serratec.dto.EnderecoInserirDTO;
 import br.com.serratec.exception.CpfException;
 import br.com.serratec.exception.EmailException;
 import br.com.serratec.exception.ResourceNotFoundException;
@@ -27,7 +28,7 @@ public class ClienteService {
 
     @Autowired
     private EnderecoRepository enderecoRepository;
-
+    
     @Autowired
     private EnderecoService enderecoService;
 
@@ -41,10 +42,6 @@ public class ClienteService {
 
         List<Cliente> clientes = clienteRepository.findAll();
         ModelMapper mapper = new ModelMapper();
-
-        // Aqui eu pego a lista de Cliente (Modelo), e converto uma a uma em um
-        // ClienteResponseDTO.
-        // No final devolvo a lista convertida.
         return clientes.stream()
                 .map(cliente -> mapper.map(cliente, ClienteResponseDTO.class))
                 .collect(Collectors.toList());
@@ -55,8 +52,7 @@ public class ClienteService {
 
         Optional<Cliente> optCliente = clienteRepository.findById(id);
 
-        if (optCliente.isEmpty()) {
-            // Aqui lanço um exception
+        if (optCliente.isEmpty()) {           
             throw new ResourceNotFoundException("Não foi possível encontrar um cliente com id: " + id);
         }
 
@@ -78,15 +74,6 @@ public class ClienteService {
         return mapper.map(clienteModel, ClienteResponseDTO.class);
     }
 
-    public void deletar(Long id) {
-        var optCliente = obterPorId(id);
-
-        if (optCliente.isEmpty()) {
-            // lancar exception
-        }
-        clienteRepository.deleteById(id);
-    }
-
     public ClienteResponseDTO inserir(ClienteRequestDTO clienteInserirDTO) {
         if (clienteRepository.findByEmail(clienteInserirDTO.getEmail()) != null) {
             throw new EmailException("Email já existe na base");
@@ -96,8 +83,8 @@ public class ClienteService {
             throw new CpfException("CPF já existe na base");
         }
 
-        Endereco endereco = clienteInserirDTO.getEndereco();
-        Endereco enderecoViaCep = enderecoService.inserir(endereco.getCep());
+        EnderecoInserirDTO endereco = clienteInserirDTO.getEndereco();
+        Endereco enderecoViaCep = enderecoService.inserir(endereco.getCep(), endereco.getComplemento(), endereco.getNumero());
         Cliente cliente = new Cliente();
         cliente.setNomeUsuario(clienteInserirDTO.getNomeUsuario());
         cliente.setEmail(clienteInserirDTO.getEmail());
@@ -113,5 +100,14 @@ public class ClienteService {
         // enderecoRepository.save();
         emailConfig.sendEmail(cliente.getEmail(), "Cadastro de Usuário", cliente.toString());
         return new ClienteResponseDTO(cliente);
+    }    
+    
+    public Boolean delete(Long id) {
+        Optional<Cliente> clientes = clienteRepository.findById(id);
+        if (clientes.isPresent()) {
+            clienteRepository.deleteById(id);
+            return true;
+        }
+        return false;
     }
 }

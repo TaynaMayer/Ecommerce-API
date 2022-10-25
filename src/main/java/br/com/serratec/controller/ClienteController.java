@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.serratec.dto.ClienteRequestDTO;
 import br.com.serratec.dto.ClienteResponseDTO;
+import br.com.serratec.repository.ClienteRepository;
 import br.com.serratec.service.ClienteService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -31,6 +32,9 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 public class ClienteController {
     @Autowired
 	private ClienteService servico;
+    
+    @Autowired
+    private ClienteRepository clienteRepository;
 	
 	@GetMapping
 	@ApiOperation(value="Lista todas os clientes", notes="Listagem de Clientes")
@@ -94,17 +98,28 @@ public class ClienteController {
 		return ResponseEntity.ok(dto);
 	}
 
+//	@DeleteMapping("/{id}")
+//	@ApiOperation(value="Remove um cliente", notes="Remover Cliente")
+//    @ApiResponses(value= {
+//            @ApiResponse(responseCode="200", description="Cliente Removido"),
+//            @ApiResponse(responseCode="401", description="Erro de autenticação"),
+//            @ApiResponse(responseCode="403", description="Não há permissão para acessar o recurso"),
+//            @ApiResponse(responseCode="404", description="Recurso não encontrado"),
+//            @ApiResponse(responseCode="505", description="Exceção interna da aplicação"),
+//            })
+//	public ResponseEntity<?> deletar(Long id){
+//		servico.deletar(id);
+//		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//	}
+	
 	@DeleteMapping("/{id}")
-	@ApiOperation(value="Remove um cliente", notes="Remover Cliente")
-    @ApiResponses(value= {
-            @ApiResponse(responseCode="200", description="Cliente Removido"),
-            @ApiResponse(responseCode="401", description="Erro de autenticação"),
-            @ApiResponse(responseCode="403", description="Não há permissão para acessar o recurso"),
-            @ApiResponse(responseCode="404", description="Recurso não encontrado"),
-            @ApiResponse(responseCode="505", description="Exceção interna da aplicação"),
-            })
-	public ResponseEntity<?> deletar(Long id){
-		servico.deletar(id);
-		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-	}
+	public ResponseEntity<?> delete(@PathVariable Long id) {
+
+        Boolean response = servico.delete(id);
+        if (response == true) {
+            return ResponseEntity.status(HttpStatus.ACCEPTED).build();
+        }
+        return ResponseEntity.notFound().build();
+
+    }
 }

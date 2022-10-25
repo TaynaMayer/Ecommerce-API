@@ -15,7 +15,8 @@ public class Endereco {
 	
 	private String cep;	
 	
-	private String rua;
+	@Column(name = "rua")
+	private String logradouro;
 	
 	private String bairro;
 	
@@ -65,15 +66,14 @@ public class Endereco {
 
     public void setLocalidade(String localidade) {
         this.localidade = localidade;
+    }   
+
+    public String getLogradouro() {
+        return logradouro;
     }
 
-    
-    public String getRua() {
-        return rua;
-    }
-
-    public void setRua(String rua) {
-        this.rua = rua;
+    public void setLogradouro(String logradouro) {
+        this.logradouro = logradouro;
     }
 
     public Integer getNumero() {
