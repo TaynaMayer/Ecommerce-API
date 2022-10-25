@@ -1,16 +1,16 @@
 package br.com.serratec.dto;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+// import javax.persistence.Column;
+// import javax.persistence.GeneratedValue;
+// import javax.persistence.GenerationType;
+// import javax.persistence.Id;
 
 import br.com.serratec.model.Categoria;
 
 public class CategoriaResponseDTO {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	// @Id
+	// @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idCategoria;
 	
 	private String nome;
@@ -18,7 +18,6 @@ public class CategoriaResponseDTO {
 	private String descricao;
 	
 	public CategoriaResponseDTO() {
-		// TODO Auto-generated constructor stub
 	}
 
     public CategoriaResponseDTO(Categoria categoria) {

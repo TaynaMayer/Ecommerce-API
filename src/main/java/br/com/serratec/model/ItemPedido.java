@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
 @Entity
 public class ItemPedido {
@@ -15,9 +16,12 @@ public class ItemPedido {
 	private Long idItemPedido;
 	
 	private Integer quantidade;
+
+	@Transient
+	private Double subTotal;
 	
 	@Column(name = "preco_venda")
-	private Integer precoVenda;
+	private Double precoVenda;
 
 	public Long getIdItemPedido() {
 		return idItemPedido;
@@ -35,11 +39,27 @@ public class ItemPedido {
 		this.quantidade = quantidade;
 	}
 
-	public Integer getPrecoVenda() {
+
+	public void setSubTotal(Double subTotal) {
+		this.subTotal = subTotal;
+	}
+
+	public Double getPrecoVenda() {
 		return precoVenda;
 	}
 
-	public void setPrecoVenda(Integer precoVenda) {
+	public void setPrecoVenda(Double precoVenda) {
 		this.precoVenda = precoVenda;
 	}
+
+	public Double getSubTotal() {
+
+		subTotal = precoVenda * quantidade;
+
+		return subTotal;
+	}
+
+	
+
+	
 }

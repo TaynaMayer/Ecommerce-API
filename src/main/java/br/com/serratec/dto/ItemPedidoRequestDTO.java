@@ -6,7 +6,7 @@ public class ItemPedidoRequestDTO {
 	
 	private Integer quantidade;
 	
-	private Integer precoVenda;
+	private Double precoVenda;
 	
 	public ItemPedidoRequestDTO() {
 		// TODO Auto-generated constructor stub
@@ -26,11 +26,13 @@ public class ItemPedidoRequestDTO {
 		this.quantidade = quantidade;
 	}
 
-	public Integer getPrecoVenda() {
+	public Double getPrecoVenda() {
 		return precoVenda;
 	}
 
-	public void setPrecoVenda(Integer precoVenda) {
+	public void setPrecoVenda(Double precoVenda) {
 		this.precoVenda = precoVenda;
 	}
+
+	
 }

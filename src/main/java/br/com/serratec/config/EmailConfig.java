@@ -13,7 +13,7 @@ public class EmailConfig {
 
     public void sendEmail(String para, String assunto, String texto) {
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom("rafael.silva138@aluno.senai.br");
+        message.setFrom("habner.martins@aluno.senai.br");
         message.setTo(para);
         message.setSubject(assunto);
         message.setText("Dados do cadastro do usuário:\n" + texto + "\n\n\n\n" + "Cadastrado com sucesso!  :)");

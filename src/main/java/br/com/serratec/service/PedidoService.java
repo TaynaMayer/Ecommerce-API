@@ -8,7 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import br.com.serratec.dto.PedidoResponseDTO;
 import br.com.serratec.exception.ResourceNotFoundException;
+import br.com.serratec.dto.ItemPedidoRequestDTO;
+import br.com.serratec.dto.ItemPedidoResponseDTO;
 import br.com.serratec.dto.PedidoRequestDTO;
+import br.com.serratec.model.ItemPedido;
 import br.com.serratec.model.Pedido;
 import br.com.serratec.repository.PedidoRepository;
 
@@ -39,7 +42,7 @@ public class PedidoService {
 
         if (optPedido.isEmpty()) {
           //Aqui lanço um exception
-            throw new ResourceNotFoundException("Não foi possível encontrar um cliente com id: " + id);
+            throw new ResourceNotFoundException("Não foi possível encontrar um pedido com id: " + id);
         }
         
         var pedidoDTO = new ModelMapper().map(optPedido.get(), PedidoResponseDTO.class);
@@ -56,11 +59,27 @@ public class PedidoService {
         pedido.setDataEnvio(pedidoInserirDTO.getDataEnvio());
         pedido.setDataPedido(pedidoInserirDTO.getDataPedido());
         pedido.setStatus(pedidoInserirDTO.getStatus());
+        pedido.setCliente(pedidoInserirDTO.getCliente());
         pedido = pedidoRepository.save(pedido);
 
         return new PedidoResponseDTO(pedido);
 
     }
+
+
+    public ItemPedidoResponseDTO inserirItemPedido(ItemPedidoRequestDTO itemPedidoDTO){
+
+        ItemPedido itemPedido = new ItemPedido();
+        itemPedido.setPrecoVenda(itemPedidoDTO.getPrecoVenda());
+        itemPedido.setQuantidade(itemPedidoDTO.getQuantidade());
+       
+        return new ItemPedidoResponseDTO(itemPedido);
+
+    }
+
+
+
+
 
     public PedidoResponseDTO atualizar(Long id, PedidoRequestDTO pedidoDto) {
 
