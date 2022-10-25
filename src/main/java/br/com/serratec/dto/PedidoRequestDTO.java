@@ -2,6 +2,7 @@ package br.com.serratec.dto;
 
 import java.time.LocalDate;
 
+import br.com.serratec.model.Cliente;
 import br.com.serratec.model.Pedido;
 
 public class PedidoRequestDTO {
@@ -17,7 +18,8 @@ public class PedidoRequestDTO {
 	private LocalDate dataEnvio;
 	
 	private String status;
-	
+
+	private Cliente cliente;
 	
 	public PedidoRequestDTO() {
 		// TODO Auto-generated constructor stub
@@ -30,6 +32,7 @@ public class PedidoRequestDTO {
 		this.dataEntrega = pedido.getDataEntrega();
 		this.dataEnvio = pedido.getDataEnvio();
 		this.status = pedido.getStatus();
+		this.cliente = pedido.getCliente();
 	}
 	
 	
@@ -80,5 +83,13 @@ public class PedidoRequestDTO {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 }

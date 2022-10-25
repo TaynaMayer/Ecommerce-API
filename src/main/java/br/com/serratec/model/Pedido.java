@@ -1,6 +1,8 @@
 package br.com.serratec.model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Pedido {
@@ -32,6 +35,22 @@ public class Pedido {
 	@ManyToOne
 	@JoinColumn(name = "id_cliente")
 	private Cliente cliente;
+
+	@OneToMany
+	//(mappedBy = "pedido")
+	private List<ItemPedido> itens = new ArrayList<ItemPedido>();
+
+	public Double getValorTotal(){
+		Double soma = 0.0;
+
+		for (ItemPedido item : itens){
+			soma += item.getSubTotal();
+		}
+
+		return soma;
+	}
+
+
 
 	public Long getIdPedido() {
 		return idPedido;
@@ -72,4 +91,30 @@ public class Pedido {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
+
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
+
+
+	public List<ItemPedido> getItens() {
+		return itens;
+	}
+
+
+
+	public void setItens(List<ItemPedido> itens) {
+		this.itens = itens;
+	}
+	
+	
 }

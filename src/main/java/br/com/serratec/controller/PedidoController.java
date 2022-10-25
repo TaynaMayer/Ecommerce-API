@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import br.com.serratec.dto.ItemPedidoRequestDTO;
+import br.com.serratec.dto.ItemPedidoResponseDTO;
 import br.com.serratec.dto.PedidoRequestDTO;
 import br.com.serratec.dto.PedidoResponseDTO;
 import br.com.serratec.exception.EmailException;
@@ -87,6 +89,26 @@ public class PedidoController {
         }
         
     }
+
+    @PostMapping("/{itenspedido}")
+    @ResponseStatus(HttpStatus.CREATED)
+    @ApiOperation(value="Insere os dados de um pedido", notes="Inserir pedidos")
+
+    public ResponseEntity<Object> inserirItemPedido(@Valid @RequestBody ItemPedidoRequestDTO pedidoInserirDTO) {   
+        
+        
+        try {
+            ItemPedidoRequestDTO itemPedidoDTO= pedidoService.inserirItemPedido(itemPedidoDTO);
+            URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{itenspedido}")
+                    .buildAndExpand(itemPedidoDTO.getIdPedido()).toUri();
+            return ResponseEntity.created(uri).body(itemPedidoDTO);
+
+        } catch (EmailException e) {
+            return ResponseEntity.unprocessableEntity().body(e.getMessage());
+        }
+        
+    }
+
     
     @PutMapping("/{id}")
     @ApiOperation(value="Atualiza os dados de um pedido", notes="Atualizar Pedido")
