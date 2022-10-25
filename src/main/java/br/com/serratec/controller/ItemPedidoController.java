@@ -1,9 +1,6 @@
 package br.com.serratec.controller;
 
 import java.util.List;
-
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.serratec.dto.ItemPedidoDTO;
 import br.com.serratec.dto.ItemPedidoInserirDTO;
-import br.com.serratec.repository.ItemPedidoRepository;
 import br.com.serratec.service.ItemPedidoService;
 
 @RestController
@@ -24,8 +20,7 @@ import br.com.serratec.service.ItemPedidoService;
 public class ItemPedidoController {
     @Autowired
     private ItemPedidoService itemPedidoService;
-    @Autowired
-    private ItemPedidoRepository itemPedidoRepository;
+   
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)

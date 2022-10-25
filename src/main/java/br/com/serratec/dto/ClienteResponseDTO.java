@@ -1,8 +1,6 @@
 package br.com.serratec.dto;
 
 import java.time.LocalDate;
-
-import javax.persistence.Embedded;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -31,8 +29,7 @@ public class ClienteResponseDTO {
 	private Endereco endereco;
 	
 	
-	public ClienteResponseDTO() {
-		// TODO Auto-generated constructor stub
+	public ClienteResponseDTO() {		
 	}
 
 	public ClienteResponseDTO(Cliente cliente) {

@@ -37,8 +37,7 @@ public class ProdutoService {
 
         Optional<Produto> optProduto = produtoRepository.findById(id);
 
-        if (optProduto.isEmpty()) {
-          //Aqui lanço um exception
+        if (optProduto.isEmpty()) {          
             throw new ResourceNotFoundException("Não foi possível encontrar um cliente com id: " + id);
         }
 
@@ -78,8 +77,7 @@ public class ProdutoService {
     public void deletar(Long id) {
         var optProduto = obterPorId(id);
         
-        if(optProduto.isEmpty()) {
-          //Aqui lanço um exception
+        if(optProduto.isEmpty()) {         
             throw new ResourceNotFoundException("Não foi possível encontrar um cliente com id: " + id);
         }
         

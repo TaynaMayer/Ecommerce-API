@@ -6,8 +6,6 @@ import br.com.serratec.model.Produto;
 
 public class ItemPedidoInserirDTO {
 
-
-
     private Produto produto;
 
     private Pedido pedido;
