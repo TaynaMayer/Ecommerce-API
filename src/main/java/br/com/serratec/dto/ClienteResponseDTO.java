@@ -24,12 +24,12 @@ public class ClienteResponseDTO {
 	
     private String cpf;
 	
-	private String telefone;
-	
-	@Embedded
-	private Endereco endereco;
+	private String telefone;	
 	
 	private LocalDate dataNascimento;
+	
+	private Endereco endereco;
+	
 	
 	public ClienteResponseDTO() {
 		// TODO Auto-generated constructor stub

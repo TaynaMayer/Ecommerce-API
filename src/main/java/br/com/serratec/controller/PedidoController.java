@@ -94,12 +94,12 @@ public class PedidoController {
     @ResponseStatus(HttpStatus.CREATED)
     @ApiOperation(value="Insere os dados de um pedido", notes="Inserir pedidos")
 
-    public ResponseEntity<Object> inserirItemPedido(@Valid @RequestBody ItemPedidoRequestDTO pedidoInserirDTO) {   
+    public ResponseEntity<Object> inserirItemPedido(@Valid @RequestBody ItemPedidoRequestDTO itemInserirDTO) {   
         
         
         try {
-            ItemPedidoRequestDTO itemPedidoDTO= pedidoService.inserirItemPedido(itemPedidoDTO);
-            URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{itenspedido}")
+            ItemPedidoResponseDTO itemPedidoDTO= pedidoService.inserirItemPedido(itemInserirDTO);
+            URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                     .buildAndExpand(itemPedidoDTO.getIdPedido()).toUri();
             return ResponseEntity.created(uri).body(itemPedidoDTO);
 
