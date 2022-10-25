@@ -3,6 +3,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import br.com.serratec.model.Endereco;
+import io.swagger.annotations.ApiModelProperty;
 
 public class EnderecoDTO {
 
@@ -10,14 +11,18 @@ public class EnderecoDTO {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idEndereco; 
 
+    @ApiModelProperty(value = "Identificador de uma rua ")
     private String cep;
-
+    
+    @ApiModelProperty(value = "Identifica uma rua")
     private String logradouro;
 
     private String bairro;
-
+    
+    @ApiModelProperty(value = "Identifica a cidade")
     private String localidade;
-
+    
+    @ApiModelProperty(value = "Identifica o estado")
     private String uf;   
 
     public EnderecoDTO() {
