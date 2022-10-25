@@ -6,15 +6,14 @@ import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import br.com.serratec.config.EmailConfig;
 import br.com.serratec.dto.ClienteRequestDTO;
 import br.com.serratec.dto.ClienteResponseDTO;
 import br.com.serratec.exception.CpfException;
 import br.com.serratec.exception.EmailException;
-import br.com.serratec.exception.ResourceBadRequestException;
 import br.com.serratec.exception.ResourceNotFoundException;
 import br.com.serratec.model.Cliente;
 import br.com.serratec.model.Endereco;
@@ -34,6 +33,9 @@ public class ClienteService {
 
     @Autowired
     private EmailConfig emailConfig;
+    
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public List<ClienteResponseDTO> obterTodos() {
 
@@ -106,8 +108,7 @@ public class ClienteService {
         cliente.setTelefone(clienteInserirDTO.getTelefone());
         cliente.setEmail(clienteInserirDTO.getEmail());
         cliente.setIdCliente(clienteInserirDTO.getIdCliente());
-
-        // cliente.setSenha(bCryptPasswordEncoder.encode(clienteInserirDTO.getSenha()));
+        cliente.setSenha(bCryptPasswordEncoder.encode(clienteInserirDTO.getSenha()));
         cliente = clienteRepository.save(cliente);
         // enderecoRepository.save();
         emailConfig.sendEmail(cliente.getEmail(), "Cadastro de Usuário", cliente.toString());

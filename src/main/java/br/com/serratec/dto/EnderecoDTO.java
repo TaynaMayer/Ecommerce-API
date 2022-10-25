@@ -34,7 +34,7 @@ public class EnderecoDTO {
         
         this.idEndereco = endereco.getIdEndereco();
         this.cep = endereco.getCep();
-        this.logradouro = endereco.getLogradouro();
+        this.logradouro = endereco.getRua();
         this.bairro = endereco.getBairro();
         this.localidade = endereco.getLocalidade();
         

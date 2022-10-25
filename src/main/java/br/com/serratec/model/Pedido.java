@@ -36,19 +36,21 @@ public class Pedido {
 	@JoinColumn(name = "id_cliente")
 	private Cliente cliente;
 
-	@OneToMany
-	//(mappedBy = "pedido")
-	private List<ItemPedido> itens = new ArrayList<ItemPedido>();
-
-	public Double getValorTotal(){
-		Double soma = 0.0;
-
-		for (ItemPedido item : itens){
-			soma += item.getSubTotal();
-		}
-
-		return soma;
-	}
+//	@OneToMany
+//	//(mappedBy = "pedido")
+//	private List<ItemPedido> itens = new ArrayList<ItemPedido>();
+//
+//	public Double getValorTotal(){
+//		Double soma = 0.0;
+//
+//		for (ItemPedido item : itens){
+//			soma += item.getSubTotal();
+//		}
+//
+//		return soma;
+//	}
+	
+	
 
 
 
@@ -105,16 +107,15 @@ public class Pedido {
 	}
 
 
-
-	public List<ItemPedido> getItens() {
-		return itens;
-	}
-
-
-
-	public void setItens(List<ItemPedido> itens) {
-		this.itens = itens;
-	}
+//	public List<ItemPedido> getItens() {
+//		return itens;
+//	}
+//
+//
+//
+//	public void setItens(List<ItemPedido> itens) {
+//		this.itens = itens;
+//	}
 	
 	
 }

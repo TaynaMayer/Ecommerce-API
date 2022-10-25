@@ -37,6 +37,8 @@ public class ProdutoRequestDTO {
 		this.valorUnitario = produto.getValorUnitario();
 	}
 	
+	
+	
 	public Long getIdProduto() {
         return idProduto;
     }
