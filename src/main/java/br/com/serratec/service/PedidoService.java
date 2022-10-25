@@ -13,23 +13,19 @@ import br.com.serratec.dto.PedidoResponseDTO;
 import br.com.serratec.exception.ResourceNotFoundException;
 import br.com.serratec.model.Cliente;
 import br.com.serratec.model.Pedido;
-import br.com.serratec.model.Produto;
 import br.com.serratec.repository.ClienteRepository;
 import br.com.serratec.repository.PedidoRepository;
-import br.com.serratec.repository.ProdutoRepository;
 
 @Service
 public class PedidoService {
 
     @Autowired
     private PedidoRepository pedidoRepository;
-   
-    
+
     @Autowired
     private ClienteRepository clienteRepository;
-    
-    private ModelMapper mapper = new ModelMapper();
 
+    private ModelMapper mapper = new ModelMapper();
 
     public List<PedidoResponseDTO> listar() {
         List<Pedido> pedidos = pedidoRepository.findAll();
@@ -48,33 +44,28 @@ public class PedidoService {
         Optional<Pedido> optPedido = pedidoRepository.findById(id);
 
         if (optPedido.isEmpty()) {
-          //Aqui lanço um exception
             throw new ResourceNotFoundException("Não foi possível encontrar um pedido com id: " + id);
         }
-        
+
         var pedidoDTO = new ModelMapper().map(optPedido.get(), PedidoResponseDTO.class);
 
         return Optional.of(pedidoDTO);
 
     }
-    
-    
-    public PedidoResponseDTO inserir(PedidoRequestDTO pedidoInserirDTO) {        
-       Optional<Cliente> cliente = clienteRepository.findById(pedidoInserirDTO.getCliente().getIdCliente());
-        Pedido pedido = new Pedido();       
+
+    public PedidoResponseDTO inserir(PedidoRequestDTO pedidoInserirDTO) {
+        Optional<Cliente> cliente = clienteRepository.findById(pedidoInserirDTO.getCliente().getIdCliente());
+        Pedido pedido = new Pedido();
         pedido.setDataEntrega(pedidoInserirDTO.getDataEntrega());
         pedido.setDataEnvio(pedidoInserirDTO.getDataEnvio());
         pedido.setDataPedido(LocalDate.now());
         pedido.setStatus(pedidoInserirDTO.getStatus());
         pedido.setCliente(cliente.get());
         pedido = pedidoRepository.save(pedido);
-        
+
         return new PedidoResponseDTO(pedido);
 
-    }    
-
-
-
+    }
 
     public PedidoResponseDTO atualizar(Long id, PedidoRequestDTO pedidoDto) {
 
@@ -90,7 +81,6 @@ public class PedidoService {
         var optPedido = obterPorId(id);
 
         if (optPedido.isEmpty()) {
-          //Aqui lanço um exception
             throw new ResourceNotFoundException("Não foi possível encontrar um cliente com id: " + id);
         }
 

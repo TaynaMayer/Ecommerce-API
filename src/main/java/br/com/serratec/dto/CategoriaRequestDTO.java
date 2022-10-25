@@ -8,8 +8,7 @@ public class CategoriaRequestDTO {
 	
 	private String descricao;
 	
-	public CategoriaRequestDTO() {
-		// TODO Auto-generated constructor stub
+	public CategoriaRequestDTO() {		
 	}
 
 	public CategoriaRequestDTO(Categoria categoria) {

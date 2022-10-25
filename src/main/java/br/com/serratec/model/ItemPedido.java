@@ -8,8 +8,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "item_pedido")
@@ -26,11 +24,10 @@ public class ItemPedido {
 
     @ManyToOne
     @JoinColumn(name = "id_pedido")
-    private Pedido pedido;    
-   
+    private Pedido pedido;
+
     private Integer quantidade;
 
-    
     @Column(name = "preco_venda")
     private Integer precoVenda;
 
