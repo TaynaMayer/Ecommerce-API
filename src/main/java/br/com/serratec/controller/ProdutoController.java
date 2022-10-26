@@ -21,8 +21,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import br.com.serratec.dto.ProdutoRequestDTO;
 import br.com.serratec.dto.ProdutoResponseDTO;
 import br.com.serratec.exception.EmailException;
-import br.com.serratec.model.Foto;
-import br.com.serratec.service.FotoService;
 import br.com.serratec.service.ProdutoService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -33,10 +31,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 public class ProdutoController {
 
     @Autowired
-    private ProdutoService produtoService;
-    
-    @Autowired
-    private FotoService fotoService;
+    private ProdutoService produtoService;   
 
     @GetMapping
     @ApiOperation(value="Lista todas os produtos", notes="Listagem de Produtos")
@@ -65,25 +60,8 @@ public class ProdutoController {
 
     public Optional<ProdutoResponseDTO> oberPorId(@PathVariable Long id){
         return  produtoService.obterPorId(id);
-   }
-    
-    
-    @GetMapping("/{id}/foto")
-    @ApiOperation(value="Retorna um produto", notes="Produto")
-    @ApiResponses(value= {
-             @ApiResponse(responseCode="200", description="Retorna um produto"),
-             @ApiResponse(responseCode="401", description="Erro de autenticação"),
-             @ApiResponse(responseCode="403", description="Não há permissão para acessar o recurso"),
-             @ApiResponse(responseCode="404", description="Recurso não encontrado"),
-             @ApiResponse(responseCode="505", description="Exceção interna da aplicação"),
-             })
-    public ResponseEntity<byte[]> buscarPorFoto(@PathVariable Long id) {
-        Foto foto = fotoService.buscar(id);
-        HttpHeaders httpHeaders = new org.springframework.http.HttpHeaders();
-        httpHeaders.add("content-type", foto.getTipo());
-        httpHeaders.add("content-length", String.valueOf(foto.getDados().length));
-        return new ResponseEntity<>(foto.getDados(), httpHeaders, HttpStatus.OK);
-    }
+   }   
+        
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)

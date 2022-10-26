@@ -1,6 +1,9 @@
 package br.com.serratec.model;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +12,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class Pedido {
@@ -29,9 +35,38 @@ public class Pedido {
 
     private String status;
 
+    @JsonBackReference
     @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "id_cliente")
     private Cliente cliente;
+    
+    @OneToMany(mappedBy = "pedido")
+    private Set<ItemPedido> items = new HashSet<>();
+
+    public Double getValorTotal() {
+
+        Double soma = 0.0;
+
+        for (ItemPedido item : items) {
+            soma += item.getPrecoVenda();
+        }
+
+        return soma;
+    }
+    
+    
+
+    public Set<ItemPedido> getItems() {
+        return items;
+    }
+
+
+
+    public void setItems(Set<ItemPedido> items) {
+        this.items = items;
+    }
+
+
 
     public Long getIdPedido() {
         return idPedido;

@@ -1,7 +1,11 @@
 package br.com.serratec.dto;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
 import br.com.serratec.model.Cliente;
+import br.com.serratec.model.ItemPedido;
 import br.com.serratec.model.Pedido;
 
 public class PedidoResponseDTO {
@@ -20,6 +24,8 @@ public class PedidoResponseDTO {
 
     private Cliente cliente;
 
+    private List<ItemPedido> itensPedidos = new ArrayList<>();
+
     public PedidoResponseDTO() {
 
     }
@@ -32,6 +38,19 @@ public class PedidoResponseDTO {
         this.dataEnvio = pedido.getDataEnvio();
         this.status = pedido.getStatus();
         this.cliente = pedido.getCliente();
+        this.valorTotal = pedido.getValorTotal();
+        
+        for (ItemPedido item : pedido.getItems()) {
+            itensPedidos.add(item);
+        }
+    }
+
+    public List<ItemPedido> getItensPedidos() {
+        return itensPedidos;
+    }
+
+    public void setItensPedidos(List<ItemPedido> itensPedidos) {
+        this.itensPedidos = itensPedidos;
     }
 
     public Double getValorTotal() {
