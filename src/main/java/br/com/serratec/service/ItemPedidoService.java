@@ -30,18 +30,22 @@ public class ItemPedidoService {
 
     public ItemPedidoDTO inserir(ItemPedidoInserirDTO ips) {
         Optional<Produto> produto = produtoRepository.findById(ips.getProduto().getIdProduto());
-
+        
+        Double subTotal = 0.0;
+        subTotal += produto.get().getValorUnitario() * ips.getQuantidade(); 
+        int precoVenda = subTotal.intValue();
         Optional<Pedido> pedido = pedidoRepository.findById(ips.getPedido().getIdPedido());
 
         ItemPedido itemPedido = new ItemPedido();
-        itemPedido.setPrecoVenda(ips.getPrecoVenda());
+        itemPedido.setPrecoVenda(precoVenda);
         itemPedido.setQuantidade(ips.getQuantidade());
         itemPedido.setProduto(produto.get());
         itemPedido.setPedido(pedido.get());
         itemPedido = itemPedidoRepository.save(itemPedido);
 
-        return new ItemPedidoDTO(itemPedido);
+                return new ItemPedidoDTO(itemPedido);
 
+        
     }
 
     public List<ItemPedidoDTO> listar() {

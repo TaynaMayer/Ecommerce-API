@@ -9,6 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "item_pedido")
 public class ItemPedido {
@@ -18,10 +20,12 @@ public class ItemPedido {
     @Column(name = "id_item_pedido")
     private Long idItemPedido;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "id_produto")
     private Produto produto;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "id_pedido")
     private Pedido pedido;

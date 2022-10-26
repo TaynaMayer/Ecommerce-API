@@ -56,7 +56,7 @@ public class ProdutoService {
         produto.setNome(produtoInserirDTO.getNome());
         produto.setQtdEstoque(produtoInserirDTO.getQtdEstoque());
         produto.setValorUnitario(produtoInserirDTO.getValorUnitario());
-        produto.setDescricao(produtoInserirDTO.getDescricao());
+        produto.setDescricao(produtoInserirDTO.getDescricao());        
         produto = produtoRepository.save(produto);
 
         return new ProdutoResponseDTO(produto);
